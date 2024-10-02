@@ -19,58 +19,58 @@
         <!-- cabecera del documento -->
         <header class="pb-3 mb-4 border-bottom">
             <i class="bi bi-rocket-takeoff-fill"></i>
-            <span class="fs-6">Proyecto 2.2 Lanzamiento de proyectiles </span>
+            <span class="fs-6">Proyecto 2.2 - Lanzamiento de proyectiles </span>
         </header>
 
         <!-- Tabla de información -->
         <legend>Lanzamiento de proyectiles</legend>
 
+        <form>
+            <table class="table">
+                <tr>
+                    <th>Valores iniciales:</th>
+                </tr>
+                <tr>
+                    <td>Velocidad inicial:</td>
+                    <td><?= $velocidadInicial ?> m/s</td>
+                </tr>
+                <tr>
+                    <td>Ángulo de inclinación:</td>
+                    <td><?= $anguloInclinacion ?> º</td>
+                </tr>
 
-        <table class="table">
-            <tr>
-                <th>Valores iniciales:</th>
-            </tr>
-            <tr>
-                <td>Velocidad inicial:</td>
-                <td><?= $velocidadInicial ?></td>
-            </tr>
-            <tr>
-                <td>Ángulo de inclinación:</td>
-                <td><?= $anguloInclinacion ?></td>
-            </tr>
+                <tr>
+                    <th>Resultados:</th>
+                </tr>
 
-            <tr>
-                <th>Resultados:</th>
-            </tr>
-
-            <tr>
-                <td>Ángulos radianes:</td>
-                <td><?= $angulosRadianes ?></td>
-            </tr>
-            <tr>
-                <td>Velocidad inicial X:</td>
-                <td><?= $velocidadX ?></td>
-            </tr>
-            <tr>
-                <td>Velocidad inicial Y:</td>
-                <td><?= $velocidadY ?></td>
-            </tr>
-            <tr>
-                <td>Alcance máximo del proyectil:</td>
-                <td><?= $alcance ?></td>
-            </tr>
-            <tr>
-                <td>Tiempo de vuelo del proyectil:</td>
-                <td><?= $tiempoVuelo ?></td>
-            </tr>
-            <tr>
-                <td>Altura máxima del proyectil:</td>
-                <td><?= $alturaMáxima ?></td>
-            </tr>
-        </table>
-        <!-- botones de accion -->
-        <button class="btn btn-primary" formaction="index.php" role="button">Volver</button>
-
+                <tr>
+                    <td>Ángulos radianes:</td>
+                    <td><?= $angulosRadianes ?> Radianes</td>
+                </tr>
+                <tr>
+                    <td>Velocidad inicial X:</td>
+                    <td><?= $velocidadX ?> m/s</td>
+                </tr>
+                <tr>
+                    <td>Velocidad inicial Y:</td>
+                    <td><?= $velocidadY ?> m/s</td>
+                </tr>
+                <tr>
+                    <td>Alcance máximo del proyectil:</td>
+                    <td><?= $alcance ?> m</td>
+                </tr>
+                <tr>
+                    <td>Tiempo de vuelo del proyectil:</td>
+                    <td><?= $tiempoVuelo ?> s</td>
+                </tr>
+                <tr>
+                    <td>Altura máxima del proyectil:</td>
+                    <td><?= $alturaMaxima ?> m</td>
+                </tr>
+            </table>
+            <!-- botones de accion -->
+            <button class="btn btn-primary" formaction="index.php" role="button">Volver</button>
+        </form>
 
         <!-- pie del documento -->
         <footer class="footer mt.auto py-3 fixed-bottom bg-light">

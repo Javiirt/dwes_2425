@@ -27,25 +27,26 @@
 
 
         <form method="POST">
-            <div class="input-group mb-3">
+            <div class="input-group">
                 <span class="input-group-text" id="inputGroup-sizing-default">Velocidad inicial</span>
                 <input type="number" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-default" step="0.01" placeholder="0.00" name="velocidad">
-                </input>
                 <br>
-                <div id="passwordHelpBlock" class="form-text">Velocidad en m/s</div>
+                
             </div>
+            <div class="form-text">Velocidad en m/s</div>
+            <br>
 
 
-            <div class="input-group mb-3">
+            <div class="input-group">
                 <span class="input-group-text" id="inputGroup-sizing-default">Angulo de lanzamiento</span>
                 <input type="number" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-default" step="0.01" placeholder="0.00" name="angulo">
                 </input>
-                <br>
-                <div id="passwordHelpBlock" class="form-text">Ángulos en grados</div>
             </div>
+            <div class="form-text">Ángulos en grados</div>
 
+            <br>
 
             <!-- botones de accion -->
             <div class="btn_group" role="group">
