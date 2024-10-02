@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>2.1 Calculadora Básica</title>
+    <title>Título</title>
 
     <!-- ccc bootstrap 533 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -16,13 +16,13 @@
         <!-- cabecera del documento -->
         <header class="pb-3 mb-4 border-bottom">
             <i class="bi bi-calculator"></i>
-            <span class="fs-6">Proyecto 2.1 - Calculadora Básica </span>
+            <span class="fs-6">Cabecera </span>
         </header>
 
         <!-- pie del documento -->
         <footer class="footer mt.auto py-3 fixed-bottom bg-light">
             <div class="container">
-                <span class="text-muted">© 2024 Javier Rodríguez Torres - DWES - 2ºDAW - Curso 24/35</span>
+                <span class="text-muted">© 2024 Javier Rodríguez Torres - 2ºDAW - Curso 24/35</span>
             </div>
         </footer>
 

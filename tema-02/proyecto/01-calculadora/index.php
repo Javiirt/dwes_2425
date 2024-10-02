@@ -30,7 +30,7 @@
  # Controlador
 
  // Cargo el modelo 
- include "modelIndex.php";
+ include "models/modelIndex.php";
 
  //Cargo la vista
- include "viewIndex.php"; 
+ include "views/viewIndex.php"; 
