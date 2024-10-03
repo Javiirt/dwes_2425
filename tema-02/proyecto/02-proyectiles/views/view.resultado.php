@@ -29,6 +29,7 @@
             <table class="table">
                 <tr>
                     <th>Valores iniciales:</th>
+                    <th></th>
                 </tr>
                 <tr>
                     <td>Velocidad inicial:</td>
@@ -41,6 +42,7 @@
 
                 <tr>
                     <th>Resultados:</th>
+                    <th></th>
                 </tr>
 
                 <tr>

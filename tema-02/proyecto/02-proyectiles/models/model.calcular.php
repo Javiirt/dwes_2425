@@ -5,7 +5,7 @@
  * Descripción: suma los valores del formulario
  */
 
-//print_r($_GET);
+ define('GRAVEDAD', 9.81); 
 
 
 //Cargo en variables
@@ -20,19 +20,24 @@ if($anguloInclinacion == ""){
     $anguloInclinacion = 0;
 }
 
+
+
 $angulosRadianes = $anguloInclinacion*M_PI/180;
 $velocidadX = $velocidadInicial*cos($angulosRadianes);
 $velocidadY = $velocidadInicial*sin($angulosRadianes);
-$alcance = ($velocidadInicial*$velocidadInicial*sin(2*$angulosRadianes))/(9.8);
-$tiempoVuelo = (2*$velocidadY)/9.8;
-$alturaMaxima = ($velocidadInicial*$velocidadInicial*(sin($angulosRadianes)*sin($angulosRadianes)))/(2*9.8);
+$alcance = ($velocidadInicial*$velocidadInicial*sin(2*$angulosRadianes))/(GRAVEDAD);
+$tiempoVuelo = (2*$velocidadY)/GRAVEDAD;
+$alturaMaxima = ($velocidadInicial*$velocidadInicial*pow(sin($angulosRadianes),2))/(2*GRAVEDAD);
 
-$angulosRadianes = round($angulosRadianes, 5);
-$velocidadX = round($velocidadX, 2);
-$velocidadY = round($velocidadY, 2);
-$alcance = round($alcance, 2);
-$tiempoVuelo = round($tiempoVuelo, 2);
-$alturaMaxima = round($alturaMaxima, 2);
+
+$angulosRadianes =number_format($angulosRadianes,5,",","");  
+$velocidadX = number_format($velocidadX, 2,",","");
+$velocidadY = number_format($velocidadY, 2,",","");
+$alcance = number_format($alcance, 2,",","");
+$tiempoVuelo = number_format($tiempoVuelo, 2,",","");
+$alturaMaxima = number_format($alturaMaxima, 2,",","");
+
+
 
 
 
