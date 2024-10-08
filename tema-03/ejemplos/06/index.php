@@ -1,8 +1,8 @@
-<?php $perfil = "Adminiistrador" ?>
+<?php $perfil = "Administrador" ?>
 
 <html lang="en">
 
-<!-- Uso vistas - if alternativo -->
+<!-- Generación dinámica del eblace admin -->
 
 <head>
     <meta charset="utf-8">
@@ -37,9 +37,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= ($perfil == "Administrador") ? "disabled" : null ?>"  href="#">Admin</a>
-                </li>
+
+                <?php if ($perfil == "Administrador"): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Admin</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </nav>
 
