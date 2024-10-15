@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Actividad 34- Tema 3 PHP</title>
+    <title>Actividad 2- Tema 3 PHP</title>
 
     <!-- ccc bootstrap 533 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -18,36 +18,35 @@
     <div class="container">
         <!-- cabecera del documento -->
         <header class="pb-3 mb-4 border-bottom">
-        <i class="bi bi-book"></i>
-            <span class="fs-3">Actividad 34- Tema 3 PHP </span>
+            <span class="fs-3"><i class="bi bi-table"></i> Actividad 2 - Tema 3 PHP </span>
         </header>
 
         <!-- Tabla de información -->
-        <legend>Tabla Libros</legend>
+        <legend>Tabla de multiplcar</legend>
 
         <form>
             <table class="table">
                 <tr>
-                    <th>Id</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Genero</th>
-                    <th>Precio</th>
+                    <!-- Primero hacemos un bucle para mostrar crear la cabecera de arriba -->
+                    <th></th> 
+                    <?php for ($i = 1; $i <= 10; $i++): ?>
+                        <th><?= $i ?></th>
+                    <?php endfor; ?>
                 </tr>
-                <?php foreach ($libros as $valor): ?>
+
+                <!-- Hacemos un bucle anidado para crear el resto de la tabla, multplicando índices -->
+                <?php for ($j = 1; $j <= 10; $j++): ?>
                     <tr>
-                        <td><?= $valor["id"] ?> </td>
-                        <td><?= $valor["titulo"] ?> </td>
-                        <td><?= $valor["autor"] ?> </td>
-                        <td><?= $valor["genero"] ?> </td>
-                        <td><?= $valor["precio"] ?> </td>
+                        <th><?= $j ?> </th> <!-- Para mostrar una cabecera a un lado, mostramos el índice antes del bucle -->
+                        <?php for ($k = 1; $k <= 10; $k++): ?>
+                            <td><?= $j * $k ?> </td>
+
+                        <?php endfor; ?>
                     </tr>
-                <?php endforeach; ?>
+                <?php endfor; ?>
 
             </table>
         </form>
-
-        <p>Total de libros: <?= count($libros) ?></p>
 
         <!-- pie del documento -->
         <footer class="footer mt.auto py-3 fixed-bottom bg-light">
