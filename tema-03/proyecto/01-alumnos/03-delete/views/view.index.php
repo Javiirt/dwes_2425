@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Proyecto 3.3 - CRUD Libros</title>
+    <title>Proyecto 3.1 - CRUD Alumnos Array</title>
 
     <!-- ccc bootstrap 533 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -18,18 +18,18 @@
     <div class="container">
         <!-- cabecera del documento -->
         <header class="pb-3 mb-4 border-bottom">
-
-            <span class="fs-3"><i class="bi bi-rocket-takeoff-fill"></i> Proyecto 3.3 - CRUD Libros</span>
+            
+            <span class="fs-3"><i class="bi bi-rocket-takeoff-fill"></i> Proyecto 3.1 - CRUD Alumnos Array</span>
         </header>
 
         <!-- Tabla de información -->
-        <legend>Tabla de libros</legend>
+        <legend>Tabla de alumnos</legend>
 
 
         <!-- Menu de alumnos -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">Home</a>
+                <a class="navbar-brand" href="index.php">Alumnos</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -67,34 +67,27 @@
             <table class="table">
                 <tr>
                     <th>Id</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Editorial</th>
-                    <th>Género</th>
-                    <th>Precio</th>
+                    <th>Nombre</th>
+                    <th>Población</th>
+                    <th>Curso</th>
                     <th>Acciones</th>
                 </tr>
-                <?php foreach ($libros as $valor): ?>
+                <?php foreach ($alumnos as $valor): ?>
                     <tr>
                         <td><?= $valor["id"] ?> </td>
-                        <td><?= $valor["titulo"] ?> </td>
-                        <td><?= $valor["autor"] ?> </td>
-                        <td><?= $valor["editorial"] ?> </td>
-                        <td><?= $valor["genero"] ?> </td>
-                        <td><?= $valor["precio"] ?> </td>
-
-
-                        <!-- Botones de accion -->
-                        <td>
+                        <td><?= $valor["nombre"] ?> </td>
+                        <td><?= $valor["poblacion"] ?> </td>
+                        <td><?= $valor["curso"] ?> </td>
+                         <!-- Botones de accion -->
+                         <td>
                             <a href="delete.php?id=<?=$valor['id'] ?>" title="Eliminar" onclick="return confirm('¿Confirmar eliminación del alumno?')"><i class="bi bi-trash-fill"></i></a>
                             <a href="edit.php?id=<?=$valor['id'] ?>" title="Editar"><i class="bi bi-pencil-fill"></i></a>
                         </td>
-
                     </tr>
                 <?php endforeach; ?>
 
             </table>
-            <p>Total de libros: <?= count($libros) ?></p>
+            <p>Total de alumnos: <?= count($alumnos) ?></p>
         </form>
 
         <!-- pie del documento -->

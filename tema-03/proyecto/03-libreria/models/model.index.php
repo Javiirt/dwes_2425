@@ -1,7 +1,7 @@
 <?php
 
 
- $alumnos = get_tabla_libros();
+ $libros = get_tabla_libros();
 
 
 

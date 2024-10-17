@@ -81,6 +81,7 @@
                 <?php endforeach; ?>
 
             </table>
+            <p>Total de alumnos: <?= count($alumnos) ?></p>
         </form>
 
         <!-- pie del documento -->
