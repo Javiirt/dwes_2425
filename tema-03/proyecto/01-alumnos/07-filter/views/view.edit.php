@@ -15,7 +15,7 @@
         <legend>Editar alumno</legend>
 
         <!-- Tabla de información -->
-        <form action="update.php?id=<?= $registro["id"] ?>" method="POST">
+        <form action="update.php?id=<?= $id ?>" method="POST">
 
             <!-- ID -->
             <div class="mb-3 row">

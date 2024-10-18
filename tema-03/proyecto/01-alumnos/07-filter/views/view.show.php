@@ -12,7 +12,7 @@
         <!-- cabecera del documento -->
         <?php include 'views/partials/header.php'; ?>
 
-        <legend>Editar alumno</legend>
+        <legend>Ver alumno</legend>
 
         <!-- Tabla de información -->
         <form action="update.php?id=<?= $registro["id"] ?>" method="POST">
@@ -29,7 +29,7 @@
             <div class="mb-3 row">
                 <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputNombre" name="nombre" value="<?= $registro["nombre"] ?>">
+                    <input type="text" class="form-control" id="inputNombre" name="nombre" value="<?= $registro["nombre"] ?>" readonly>
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
             <div class="mb-3 row">
                 <label for="inputPoblacion" class="col-sm-2 col-form-label">Poblacion</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPoblacion" name="poblacion" value="<?= $registro["poblacion"] ?>">
+                    <input type="text" class="form-control" id="inputPoblacion" name="poblacion" value="<?= $registro["poblacion"] ?>" readonly>
                 </div>
             </div>
 
@@ -45,15 +45,14 @@
             <div class="mb-3 row">
                 <label for="inputCurso" class="col-sm-2 col-form-label">Curso</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputCurso" name="curso" value="<?= $registro["curso"] ?>">
+                    <input type="text" class="form-control" id="inputCurso" name="curso" value="<?= $registro["curso"] ?>" readonly>
                 </div>
             </div>
 
 
             <!-- Botones de acción -->
             <div class="btn_group" role="group">
-                <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
-                <button class="btn btn-primary" type="submit" formaction="update.php">Actualizar</button>
+                <a class="btn btn-secondary" href="index.php" role="button">Volver</a>
             </div>
 
 
