@@ -53,7 +53,7 @@
             <!-- Botones de acción -->
             <div class="btn_group" role="group">
                 <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
-                <button class="btn btn-primary" type="submit" formaction="update.php">Actualizar</button>
+                <button class="btn btn-primary" type="submit" formaction="update.php?id=<?= $id ?>">Actualizar</button>
             </div>
 
 

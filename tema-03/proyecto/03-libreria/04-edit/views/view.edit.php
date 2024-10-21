@@ -4,7 +4,7 @@
 <head>
     <!-- Frameworks bootstrap -->
     <?php include 'views/layouts/head.html';?>
-    <title>Proyecto 3.1 - CRUD Alumnos Array</title>
+    <title>Proyecto 3.3 - CRUD Libros</title>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
         <!-- cabecera del documento -->
         <?php include 'views/partials/header.php'; ?>
 
-        <legend>Editar alumno</legend>
+        <legend>Editar libro</legend>
 
         <!-- Tabla de información -->
         <form action="update.php?id=<?= $id ?>" method="POST">
@@ -25,27 +25,43 @@
                 </div>
             </div>
 
-            <!-- Nombre -->
+            <!-- Titulo -->
             <div class="mb-3 row">
-                <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
+                <label for="inputTitulo" class="col-sm-2 col-form-label">Título</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputNombre" name="nombre" value="<?= $registro["nombre"] ?>">
+                    <input type="text" class="form-control" id="inputTitulo" name="titulo" value="<?= $registro["titulo"] ?>">
                 </div>
             </div>
 
-            <!-- Población -->
+            <!-- Autor -->
             <div class="mb-3 row">
-                <label for="inputPoblacion" class="col-sm-2 col-form-label">Poblacion</label>
+                <label for="inputAutor" class="col-sm-2 col-form-label">Autor</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPoblacion" name="poblacion" value="<?= $registro["poblacion"] ?>">
+                    <input type="text" class="form-control" id="inputAutor" name="autor" value="<?= $registro["autor"] ?>">
                 </div>
             </div>
 
-            <!-- Curso -->
+            <!-- Editorial -->
             <div class="mb-3 row">
-                <label for="inputCurso" class="col-sm-2 col-form-label">Curso</label>
+                <label for="inputEditorial" class="col-sm-2 col-form-label">Editorial</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputCurso" name="curso" value="<?= $registro["curso"] ?>">
+                    <input type="text" class="form-control" id="inputEditorial" name="editorial" value="<?= $registro["editorial"] ?>">
+                </div>
+            </div>
+
+            <!-- Genero -->
+            <div class="mb-3 row">
+                <label for="inputGenero" class="col-sm-2 col-form-label">Genero</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputGenero" name="genero" value="<?= $registro["genero"] ?>">
+                </div>
+            </div>
+
+            <!-- Precio -->
+            <div class="mb-3 row">
+                <label for="inputPrecio" class="col-sm-2 col-form-label">Precio</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputPrecio" name="precio" value="<?= $registro["precio"] ?>">
                 </div>
             </div>
 

@@ -22,9 +22,7 @@ $poblacion = $_POST["poblacion"];
 $curso = $_POST["curso"];
 
 
-$idGet = $_GET['id'];
-
-
+$idGet = $_GET['id']; 
 
 #Creo un array asociativo con los detalles del nuevo alumno
 $registro =

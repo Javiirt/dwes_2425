@@ -28,6 +28,7 @@
  #Creo un array asociativo con los detalles del nuevo alumno
  $registro = 
  [
+   'id' => $id,
    'titulo' =>  $titulo,
    'autor' => $autor,
    'editorial'=> $editorial,

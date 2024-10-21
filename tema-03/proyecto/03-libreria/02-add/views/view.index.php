@@ -19,7 +19,7 @@
         <!-- cabecera del documento -->
         <header class="pb-3 mb-4 border-bottom">
 
-            <span class="fs-3"><i class="bi bi-rocket-takeoff-fill"></i> Proyecto 3.3 - CRUD Libros</span>
+            <span class="fs-3"><i class="bi bi-book"></i> Proyecto 3.3 - CRUD Libros</span>
         </header>
 
         <!-- Tabla de información -->
@@ -83,12 +83,6 @@
                         <td><?= $valor["genero"] ?> </td>
                         <td><?= $valor["precio"] ?> </td>
 
-
-                        <!-- Botones de accion -->
-                        <td>
-                            <a href="delete.php?id=<?=$valor['id'] ?>" title="Eliminar" onclick="return confirm('¿Confirmar eliminación del alumno?')"><i class="bi bi-trash-fill"></i></a>
-                            <a href="edit.php?id=<?=$valor['id'] ?>" title="Editar"><i class="bi bi-pencil-fill"></i></a>
-                        </td>
 
                     </tr>
                 <?php endforeach; ?>
