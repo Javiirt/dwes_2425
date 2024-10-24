@@ -81,38 +81,38 @@ class Class_calculadora
     //Método que realiza una suma de los valores
     public function suma()
     {
-        $this->setOperador('+');
+        $this->setOperador('Suma');
         $this->resultado = $this->valor1 + $this->valor2;
     }
 
     //Método que realiza una resta de los valores
     public function resta()
     {
-        $this->setOperador('-');
+        $this->setOperador('Resta');
         $this->resultado = $this->valor1 - $this->valor2;
     }
 
     //Método que realiza una division de los valores
     public function division()
     {
-        $this->setOperador('/');
+        $this->setOperador('División');
         $this->resultado = $this->valor1 / $this->valor2;
     }
 
     //Método que realiza una multiplicacion de los valores
     public function multiplicacion()
     {
-        $this->setOperador('*');
-        $this->resultado = $this->valor1 * -$this->valor2;
+        $this->setOperador('Producto');
+        $this->resultado = $this->valor1 * $this->valor2;
     }
 
     //Método que realiza una potencia de los valores
     public function potencia()
     {
-        $this->setOperador('**');
-        return $this->valor1 ** $this->valor2;
+        $this->setOperador('Potencia');
+        $this->resultado = pow($this->valor1, $this->valor2);
     }
 
 
-    
+
 }
