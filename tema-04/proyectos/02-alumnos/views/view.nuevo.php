@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'views/layouts/layout.head.html'; ?>
-    <title>Nuevo Artículo - CRUD Artículos </title>
+    <title>Nuevo Alumno - CRUD Alumno </title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
         <!-- Encabezado proyecto -->
         <?php include 'views/partials/partial.header.php'; ?>
 
-        <legend>Formulario Nuevo Artículo</legend>
+        <legend>Formulario Nuevo Alumno</legend>
 
         <!-- Formulario Nuevo artículo -->
 
@@ -25,60 +25,61 @@
                 <input type="text" class="form-control" name="id">
             </div>
 
-            <!-- Descripción -->
+            <!-- Nombre -->
             <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre">
             </div>
 
-            <!-- Modelo -->
+            <!-- apellidos -->
             <div class="mb-3">
-                <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" name="apellidos">
             </div>
 
-            <!-- Select Dinámico Marcas -->
+            <!-- email -->
             <div class="mb-3">
-                <label for="marca" class="form-label">Marca</label>
-                <select class="form-select" name="marca" id="marca" >
-                    <option selected disabled>Seleccione una Marca</option>
-                    <!-- mostrar lista marcas -->
-                    <?php foreach($marcas as $indice => $data):?>
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+
+            <!-- Fecha de nacimiento -->
+            <div class="mb-3">
+                <label for="f_nacimiento" class="form-label">Fecha de nacimiento (dd-mm-aaaa)</label>
+                <input type="text" class="form-control" name="f_nacimiento">
+            </div>
+
+            <!-- Select curso -->
+            <div class="mb-3">
+                <label for="curso" class="form-label">Cursos</label>
+                <select class="form-select" name="curso" id="curso">
+                    <option selected disabled>Seleccione un Curso</option>
+                    <!-- mostar lista curso -->
+                    <?php foreach ($cursos as $indice => $data): ?>
                         <option value="<?= $indice ?>">
                             <?= $data ?>
                         </option>
-                    <?php endforeach;?>
+                    <?php endforeach; ?>
                 </select>
 
             </div>
 
-            <!-- Unidades -->
-            <div class="mb-3">
-                <label for="unidades" class="form-label">Unidades</label>
-                <input type="number" class="form-control" name="unidades" step="0.01">
-            </div>
 
-            <!-- Precio -->
+            <!-- lista checkbox dinámica categorías -->
             <div class="mb-3">
-                <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01">
-            </div>
+                <label for="asignaturas" class="form-label">Seleccione las asignaturas</label>
 
-            <!-- lista checbox dinámica categorias -->
-            <div class="mb-3">
-                <label for="categorias" class="form-label">Seleccione las Categorías</label>
-                <div class="form-control">
-                    <!-- muestro el array categorías -->
-                    <?php foreach($categorias as $indice => $data): ?>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="categorias[]" value="<?= $indice ?>">
-                            <label class="form-check-label" for="">
-                                <?= $data ?>
-                            </label>
-                        </div>
-                    <?php endforeach; ?> 
-                    
-                </div>
+                <!-- mostar el array asignaturas -->
+                <?php foreach ($asignaturas as $indice => $data): ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="asignaturas[]" value="<?=$indice?>">
+                        <label class="form-check-label" for="">
+                            <?= $data ?>
+                        </label>
+                    </div>
+                <?php endforeach; ?>
+
+
             </div>
 
             <!-- botones de acción -->

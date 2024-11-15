@@ -1,7 +1,7 @@
-<!-- menú principal Alumnos -->
+<!-- menú principal Artículos -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">Alumnos</a>
+        <a class="navbar-brand" href="index.php">Artículos</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,10 +19,8 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="order.php?criterio=id">Id</a></li>
                         <li><a class="dropdown-item" href="order.php?criterio=nombre">Nombre</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=poblacion">Apellidos</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=curso">email</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=nombre">fecha de nacimiento</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=poblacion">Curso</a></li>
+                        <li><a class="dropdown-item" href="order.php?criterio=poblacion">Población</a></li>
+                        <li><a class="dropdown-item" href="order.php?criterio=curso">Curso</a></li>
                     </ul>
                 </li>
 

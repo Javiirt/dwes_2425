@@ -1,11 +1,10 @@
 <?php
 
 /*
-        modelo: model.editar.php
-        descripción: carga los datos del alumno que deseo actualizar
+        modelo: model.mostrar.php
+        descripción: carga los datos del alumno
 
         Método GET:
-
             - indice de la tabla en la que se encuentra el alumno
     */
 

@@ -13,7 +13,7 @@
         <!-- Encabezado proyecto -->
         <?php include 'views/partials/partial.header.php'; ?>
 
-        <legend>Editar Alumno</legend>
+        <legend>Mostrar Alumno</legend>
 
         <!-- Mostrar artículo -->
 
@@ -28,31 +28,31 @@
             <!-- Nombre -->
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?= $alumno->getNombre() ?>">
+                <input type="text" class="form-control" name="nombre" value="<?= $alumno->getNombre() ?>" readonly>
             </div>
 
             <!-- apellidos -->
             <div class="mb-3">
                 <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos" value="<?= $alumno->getApellidos() ?>">
+                <input type="text" class="form-control" name="apellidos" value="<?= $alumno->getApellidos() ?>" readonly >
             </div>
 
             <!-- email -->
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" name="email" value="<?= $alumno->getEmail() ?>">
+                <input type="text" class="form-control" name="email" value="<?= $alumno->getEmail() ?>" readonly>
             </div>
 
             <!-- Fecha de nacimiento -->
             <div class="mb-3">
                 <label for="f_nacimiento" class="form-label">Fecha de nacimiento</label>
-                <input type="text" class="form-control" name="f_nacimiento" value="<?= $alumno->getFNacimiento() ?>">
+                <input type="text" class="form-control" name="f_nacimiento" value="<?= $alumno->getFNacimiento() ?>" readonly>
             </div>
 
             <!-- Select curso -->
             <div class="mb-3">
                 <label for="curso" class="form-label">Cursos</label>
-                <select class="form-select" name="curso" id="curso">
+                <select class="form-select" name="curso" id="curso" disabled>
                     <option selected disabled>Seleccione un Curso</option>
                     <!-- mostar lista curso -->
                     <?php foreach ($cursos as $indice => $data): ?>
@@ -72,7 +72,7 @@
                 <!-- mostar el array asignaturas -->
                 <?php foreach ($asignaturas as $indice => $data): ?>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="asignaturas[]" value="<?=$indice?>"
+                        <input class="form-check-input" type="checkbox" name="asignaturas[]" value="<?=$indice?>" disabled
                         <?= (in_array($indice, $alumno->getAsignaturas()) ? 'checked' : null ) ?>
                             >
                         <label class="form-check-label" for="">
@@ -85,9 +85,7 @@
             </div>
 
             <!-- botones de acción -->
-            <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
-            <button type="reset" class="btn btn-danger">Borrar</button>
-            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a class="btn btn-secondary" href="index.php" role="button">Volver</a>
 
         </form>
 

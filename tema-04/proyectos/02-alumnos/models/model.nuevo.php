@@ -1,21 +1,17 @@
 <?php
 
-    /*
+/*
         Modelo: model.nuevo.php
-        Descripción: genera los datos necesarios para añadir nuevo artículo
+        Descripción: genera los datos necesarios para añadir nuevos alumnos
     */
 
-    # Símbolo monetario local
-    setlocale(LC_MONETARY,"es_ES");
 
-    # Creo un objeto de la clase tabla artículos
-    $obj_tabla_articulos = new Class_tabla_articulos();
 
-    # Cargo tabla de marcas
-    $marcas = $obj_tabla_articulos->getMarcas();
+# Creo un objeto de la clase tabla alumnos
+$obj_tabla_alumnos = new Class_tabla_alumnos();
 
-    # Cargo tabla de categorías
-    $categorias = $obj_tabla_articulos->getCategorias();
+# Cargo tabla de marcas
+$cursos = $obj_tabla_alumnos->getCurso();
 
-    
-
+# Cargo tabla de categorías
+$asignaturas = $obj_tabla_alumnos->getAsignaturas();

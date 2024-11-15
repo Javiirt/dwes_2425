@@ -53,7 +53,7 @@ $obj_tabla_libros = new Class_tabla_libros();
 $obj_tabla_libros->getDatos();
 
 # Actualizo la tabla 
-$obj_tabla_libros->update($articulo, $indice);
+$obj_tabla_libros->update($libro, $indice);
 
 # Extraer la tabla para la vista
 $array_libros = $obj_tabla_libros->tabla;

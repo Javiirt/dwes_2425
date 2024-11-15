@@ -1,28 +1,31 @@
 <?php
 
-    /*
+/*
         modelo: model.eliminar.php
-        descripción: elimina un artículo de la tabla
+        descripción: elimina un alumno de la tabla
         
         Método GET:
 
-            - indice: de la tabla donde se encuentra el artículo que voy a eliminar
+            - indice: de la tabla donde se encuentra el alumno que voy a eliminar
     */
 
-    # Cargamos el indice del artículo
-    $indice = $_GET['indice'];
+# Cargamos el indice del alumno
+$indice = $_GET['id'];
 
-    # Creo un objeto de la clase tabla de artículos
-    $obj_tabla_articulos = new Class_tabla_articulos();
+# Creo un objeto de la clase tabla de alumnos
+$obj_tabla_alumnos = new Class_tabla_alumnos();
 
-    #  Cargo los datos de artículos
-    $obj_tabla_articulos->getDatos();
-    
-    # Cargo el array de marcas - lista desplegable dinámica
-    $marcas = $obj_tabla_articulos->getMarcas();
+# Cargo la tabla de cursos
+$cursos = $obj_tabla_alumnos->getCurso();
 
-    # Obtener el objeto de la clase artículo correspondiente a ese índice
-    $obj_tabla_articulos->delete($indice);
+# Cargo la tabla de asignaturas
+$asignaturas = $obj_tabla_alumnos->getAsignaturas();
 
-    # Obtengo la tabla de artículos actualizada para la vista
-    $array_articulos = $obj_tabla_articulos->getTabla();
+# Obtengo los articulos
+$obj_tabla_alumnos->getAlumnos();
+
+# Obtener el objeto de la clase alumno correspondiente a ese índice
+$obj_tabla_alumnos->delete($indice);
+
+# Obtengo la tabla de alumnos actualizada para la vista
+$array_alumnos = $obj_tabla_alumnos->getTabla();

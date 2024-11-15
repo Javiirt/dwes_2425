@@ -1,54 +1,51 @@
 <?php
-    /*
-        modelo: model.create.php
-        descripción: añade el nuevo artículo a la tabla
-        
-        Métod POST:
-            - id
-            - descripcion
-            - modelo
-            - marca (indice)
-            - unidades
-            - precio
-            - categorias[]
-    */
+/**
+ * modelo: model.create.php 
+ * descripcion: añade el nuevo alumno a la tabla
+ *  metod POST:
+ *      - id
+ *      - nombre
+ *      - apellidos
+ *      - email
+ *      - fecha de nacimiento
+ *      - curso
+ *      - asignaturas
+ */
 
-    # Cargo los detalles del  formulario
-    $id = $_POST['id'];
-    $descripcion = $_POST['descripcion'];
-    $modelo = $_POST['modelo'];
-    $marca = $_POST['marca'];
-    $unidades = $_POST['unidades'];
-    $precio = $_POST['precio'];
-    $categorias = $_POST['categorias'];
+ # Cargo los detalles del formulario
+ $id = $_POST['id'];
+ $nombre = $_POST['nombre'];
+ $apellidos = $_POST['apellidos'];
+ $email = $_POST['email'];
+ $f_nacimiento = $_POST['f_nacimiento'];
+ $curso = $_POST['curso'];
+ $array_asignaturas = $_POST['asignaturas'];
 
-    # Validación
+ # Crear un objeto de la clase tabla_alumnos
+ $obj_tabla_alumnos = new Class_tabla_alumnos();
 
-    # Crear un objeto de la clase tabla_articulos
-    $obj_tabla_articulos = new Class_tabla_articulos();
+ # Obtengo los articulos
+ $obj_tabla_alumnos->getAlumnos();
 
-    # Cargo los artículos
-    $obj_tabla_articulos->getDatos();
+ # Obtengo el array de marcas
+ $cursos = $obj_tabla_alumnos->getCurso();
 
-    # Obtengo el array de marcas
-    $marcas = $obj_tabla_articulos->getMarcas();
+ # Obtengo el array de categorias
+ $asignaturas = $obj_tabla_alumnos->getAsignaturas();
 
-    # Obtengo el  array de categorias
-    $array_categorias = $obj_tabla_articulos->getCategorias();
+ # Crear ub objeto de la clase alumnos a partir de los detalles del formulario
+ $alumno = new Class_alumno(
+    $id,
+    $nombre,
+    $apellidos,
+    $email,
+    $f_nacimiento,
+    $curso,
+    $array_asignaturas
+ );
 
-    # Crear un objeto de la clase artículos a partir de los detalles del formulario
-    $articulo = new Class_articulo(
-        $id,
-        $descripcion,
-        $modelo,
-        $marca,
-        $categorias,
-        $unidades,
-        $precio
-    );
+ # Añadir el alumno a la tabla
+ $obj_tabla_alumnos->create($alumno);
 
-    # Añadir el artículo a la tabla
-    $obj_tabla_articulos->create($articulo);
-
-    # Obtener la array artículos
-    $array_articulos = $obj_tabla_articulos->getTabla();
+ # Obtener la tabla de alumnos
+ $array_alumnos = $obj_tabla_alumnos->getTabla();

@@ -1,66 +1,59 @@
 <?php
 
-    /*
-        Modelo: model.update.php
-        Descripción: actualiza los datos del registro a partir de los detalles del formulario
 
-        Método POST:
-                    - id
-                    - descripcion
-                    - modelo
-                    - genero
-                    - marca
-                    - unidades
-                    - precio
-                    - categorias
-        
-        Método GET:
-                    - indice (indice de la tabla correspondiente a dicho registro)
-    */
+// Modelo: model.update.php
+// Descripción: actualiza los datos del registro a partir de los detalles del formulario
+//
+// metod POST:
+//     - id
+//     - nombre
+//     - apellidos
+//     - email
+//     - fecha de nacimiento
+//     - curso
+//     - asignaturas
+//
+// Método GET:
+//     - indice (indice de la tabla correspondiente a dicho registro)
 
-    # Símbolo monetario local
-    setlocale(LC_MONETARY,"es_ES");
+# Cargo los detalles del formulario
+$id = $_POST['id'];
+$nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$email = $_POST['email'];
+$f_nacimiento = $_POST['f_nacimiento'];
+$curso = $_POST['curso'];
+$array_asignaturas = $_POST['asignaturas'];
 
-    # Cargo los detalles del  formulario
-    $id = $_POST['id'];
-    $descripcion = $_POST['descripcion'];
-    $modelo = $_POST['modelo'];
-    $marca = $_POST['marca'];
-    $unidades = $_POST['unidades'];
-    $precio = $_POST['precio'];
-    $categorias = $_POST['categorias'];
+# Cargo el índice de la tabla donde se encuentra el artículo
+$indice = $_GET['indice'];
 
-    # Crear un objeto de la clase artículos a partir de los detalles del formulario
-    $articulo = new Class_articulo(
-        $id,
-        $descripcion,
-        $modelo,
-        $marca,
-        $categorias,
-        $unidades,
-        $precio
-    );
+# Crear ub objeto de la clase alumnos a partir de los detalles del formulario
+$alumno = new Class_alumno(
+    $id,
+    $nombre,
+    $apellidos,
+    $email,
+    $f_nacimiento,
+    $curso,
+    $array_asignaturas
+);
 
-    # Cargo el índice de la tabla donde se encuentra el artículo
-    $indice = $_GET['indice'];
-    
-    # Creo un objeto de la clase tabla artículos
-    $obj_tabla_articulos = new Class_tabla_articulos();
+# Crear un objeto de la clase tabla_alumnos
+$obj_tabla_alumnos = new Class_tabla_alumnos();
 
-    # Cargo los datos en el objeto de la clase tabla de artículos
-    $obj_tabla_articulos->getDatos();
+# Obtengo los articulos
+$obj_tabla_alumnos->getAlumnos();
 
-    # Actualizo la tabla 
-    $obj_tabla_articulos->update($articulo, $indice);
+# Obtengo el array de marcas
+$cursos = $obj_tabla_alumnos->getCurso();
 
-    # Extraer la tabla para la vista
-    $array_articulos = $obj_tabla_articulos->getTabla();
+# Obtengo el array de categorias
+$asignaturas = $obj_tabla_alumnos->getAsignaturas();
 
-    # Extraer array de marcas para la vista
-    $marcas = $obj_tabla_articulos->getMarcas();
+# Actualizo la tabla 
+$obj_tabla_alumnos->update($alumno, $indice);
 
-
-    
-
-    
+#Defino la tabla
+$array_alumnos = $obj_tabla_alumnos->getTabla();
 

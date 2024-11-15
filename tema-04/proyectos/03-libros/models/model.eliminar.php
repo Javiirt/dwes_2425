@@ -1,6 +1,6 @@
 <?php
 
-    /*
+/*
         modelo: model.eliminar.php
         descripción: elimina un libro de la tabla
         
@@ -9,17 +9,23 @@
             - indice: de la tabla donde se encuentra el libro que voy a eliminar
     */
 
-    # Cargamos el indice del libro
-    $indice = $_GET['indice'];
+# Cargamos el indice del libro
+$indice = $_GET['indice'];
 
-    # Creo un objeto de la clase tabla de libros
-    $obj_tabla_libros = new Class_tabla_libros();
+# Creo un objeto de la clase tabla de libros
+$obj_tabla_libros = new Class_tabla_libros();
 
-    #  Cargo los datos de libros
-    $obj_tabla_libros->getDatos();
+#  Cargo los datos de libros
+$obj_tabla_libros->getDatos();
 
-    # Obtener el objeto de la clase libro correspondiente a ese índice
-    $obj_tabla_libros->delete($indice);
+# Obtener el objeto de la clase libro correspondiente a ese índice
+$obj_tabla_libros->delete($indice);
 
-    # Obtengo la tabla de libros actualizada para la vista
-    $array_libros = $obj_tabla_libros->tabla;
+# Obtengo la tabla de libros actualizada para la vista
+$array_libros = $obj_tabla_libros->tabla;
+
+# Cargo tabla de materias
+$materias = $obj_tabla_libros->getMaterias();
+
+# Cargo tabla de etiquetas
+$etiquetas = $obj_tabla_libros->getEtiquetas();

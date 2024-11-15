@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'views/layouts/layout.head.html'; ?>
-    <title>Editar Artículo - CRUD Artículos </title>
+    <title>Editar Libro - CRUD Libros </title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
         <!-- Encabezado proyecto -->
         <?php include 'views/partials/partial.header.php'; ?>
 
-        <legend>Formulario Editar Artículo</legend>
+        <legend>Formulario Editar Libros</legend>
 
         <!-- Formulario Editar artículo -->
 
@@ -91,7 +91,7 @@
             <!-- botones de acción -->
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
             <button type="reset" class="btn btn-danger">Borrar</button>
-            <button type="submit" class="btn btn-primary">Añadir</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
 
         </form>
 

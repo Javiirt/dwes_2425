@@ -1,25 +1,20 @@
 <?php
+/**
+ *  Modelo: model.index.php 
+ *  Descripcion: genera array objetos de la clase articulos
+ */
 
-    /*
-        Modelo: model.index.php
-        Descripción: genera array objetos de la clase artículos
-    */
+ # Creo un objeto de la clase alumno
+ $obj_tabla_alumnos = new Class_tabla_alumnos();
 
-    # Símbolo monetario local
-    setlocale(LC_MONETARY,"es_ES");
+ # Cargo la tabla de cursos
+ $cursos = $obj_tabla_alumnos->getCurso();
 
-    # Creo un objeto de la clase tabla artículos
-    $obj_tabla_articulos = new Class_tabla_articulos();
+ # Cargo la tabla de asignaturas
+ $asignaturas = $obj_tabla_alumnos->getAsignaturas();
 
-    # Cargo tabla de marcas
-    $marcas = $obj_tabla_articulos->getMarcas();
+ # Relleno el array de objetos
+ $obj_tabla_alumnos->getAlumnos();
 
-    # Cargo tabla de categorías
-    $categorias = $obj_tabla_articulos->getCategorias();
-
-    # Relleno el array de objetos
-    $obj_tabla_articulos->getDatos();
-
-    # Obtener tabla de artículos
-    $array_articulos = $obj_tabla_articulos->getTabla();
-
+ # Obtener tabla de articulos (Este paso es necesario porque hay que devolver un array y no un objeto)
+ $array_alumnos = $obj_tabla_alumnos->getTabla();
