@@ -17,7 +17,7 @@
  */
 
 
-class Class_profesor
+class Class_tabla_profesor
 {
 
     #Variables
@@ -173,5 +173,19 @@ class Class_profesor
 
         asort($array);
         return $array;
+    }
+
+    #mostrar_nombre_asignaturas() - devuelve el nombre de todas las asignaturas
+    public function mostrar_nombre_asignaturas($lista_indice){
+
+        $lista_nombres = [];
+        $lista_asignaturas = $this->getAsignaturas();
+
+        foreach ($lista_indice as $key => $value) {
+            $lista_nombres[] =  $lista_asignaturas[$value];
+        }
+
+        return $lista_nombres;
+
     }
 }

@@ -8,7 +8,7 @@
    - apellidos
    - nrp
    - fecha_nacimiento
-   - población
+   - poblacion
    - especialidad (lista desplegable)
    - asignaturas (lista checkbox)
 
@@ -26,7 +26,7 @@ class Class_profesor
     public $apellidos;
     public $nrp;
     public $fecha_nacimiento;
-    public $población;
+    public $poblacion;
     public $especialidad;
     public $asignaturas;
 
@@ -37,7 +37,7 @@ class Class_profesor
         $apellidos = null,
         $nrp = null,
         $fecha_nacimiento = null,
-        $población = null,
+        $poblacion = null,
         $especialidad = null,
         $asignaturas = null
     ) {
@@ -46,8 +46,22 @@ class Class_profesor
         $this->apellidos = $apellidos;
         $this->nrp = $nrp;
         $this->fecha_nacimiento = $fecha_nacimiento;
-        $this->población = $población;
+        $this->poblacion = $poblacion;
         $this->especialidad = $especialidad;
         $this->asignaturas = $asignaturas;
+    }
+
+    public function getEdad(){
+        # Convertimos la fecha de nacimiento en un objeto DateTime
+        $fechaNac = new DateTime($this->fecha_nacimiento);
+        $fechaActual = new DateTime();
+
+        # Calculo la diferencia entre la fecha actual y la fecha de nacimiento
+        $diferencia = $fechaActual->diff($fechaNac);
+
+        # Devolcmos la diferencia en años
+        return $diferencia->y;
+
+
     }
 }
