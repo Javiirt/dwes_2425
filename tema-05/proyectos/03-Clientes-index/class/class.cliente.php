@@ -9,52 +9,32 @@ class Class_cliente
 {
 
         public $id;
-        public $nombre;
         public $apellidos;
-        public $email;
+        public $nombre;
         public $telefono;
-        public $direccion;
-        public $poblacion;
-        public $provincia;
-        public $nacionalidad;
+        public $ciudad;
         public $dni;
-        public $fechaNac;
-        public $id_curso;
+        public $email;
+        
 
 
         public function __construct(
                 $id = null,
-                $nombre = null,
-                $apellidos = null,
-                $email = null,
-                $telefono = null,
-                $direccion = null,
-                $poblacion = null,
-                $provincia = null,
-                $nacionalidad = null,
-                $dni = null,
-                $fechaNac = null,
-                $id_curso = null
+                $apellidos= null,
+                $nombre= null,
+                $telefono= null,
+                $ciudad= null,
+                $dni= null,
+                $email= null,
         ) {
                 $this->id = $id;
-                $this->nombre = $nombre;
                 $this->apellidos = $apellidos;
-                $this->email = $email;
+                $this->nombre = $nombre;
                 $this->telefono = $telefono;
-                $this->direccion = $direccion;
-                $this->poblacion = $poblacion;
-                $this->provincia = $provincia;
-                $this->nacionalidad = $nacionalidad;
+                $this->ciudad = $ciudad;
                 $this->dni = $dni;
-                $this->fechaNac = $fechaNac;
-                $this->id_curso = $id_curso;
+                $this->email = $email;
+                
         }
 
-        public function edad()
-        {
-                $fechaActual = new DateTime();
-                $fechaNacimiento = new DateTime($this->fechaNac);
-                $edad = $fechaNacimiento->diff($fechaActual);
-                return $edad->y;
-        }
 }

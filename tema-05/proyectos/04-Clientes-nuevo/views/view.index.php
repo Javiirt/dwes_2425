@@ -23,14 +23,12 @@
                     <!-- Mostramos el encabezado de la tabla -->
                     <tr>
                         <th>Id</th>
-                        <th>Nombre</th>
                         <th>Apellidos</th>
-                        <th>Email</th>
+                        <th>Nombre</th>
                         <th>Telefono</th>
-                        <th>Nacionalidad</th>
+                        <th>Ciudad</th>
                         <th>DNI</th>
-                        <th>Curso</th>
-                        <th>Edad</th>
+                        <th>Email</th>
                         <!-- columna de acciones -->
                         <th>Acciones</th>
                     </tr>
@@ -41,15 +39,12 @@
                         <tr class="align-middle">
                             <!-- Detalles de artículos -->
                             <td><?= $cliente->id ?></td>
-                            <td><?= $cliente->nombre ?></td>
                             <td><?= $cliente->apellidos ?></td>
-                            <td><?= $cliente->email ?></td>
+                            <td><?= $cliente->nombre ?></td>
                             <td><?= $cliente->telefono ?></td>
-                            <td><?= $cliente->nacionalidad ?></td>
+                            <td><?= $cliente->ciudad ?></td>
                             <td><?= $cliente->dni ?></td>
-                            <td><?= $cliente->curso ?></td>
-                            <td><?= $cliente->edad ?> años</td>
-
+                            <td><?= $cliente->email ?></td>
                             <!-- Columna de acciones -->
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -63,7 +58,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="10">Nº Registros <?= $clientes->num_rows ?></td>
+                        <td colspan="8">Nº Registros <?= $clientes->num_rows ?></td>
                     </tr>
                 </tfoot>
             </table>

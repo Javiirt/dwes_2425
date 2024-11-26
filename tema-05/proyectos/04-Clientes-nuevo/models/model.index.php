@@ -13,7 +13,7 @@
         'localhost',
         'root',
         '',
-        'fp');
+        'gesbank');
 
     # Cargo tabla de clientes
     // $cliente es un objeto de la clase mysqli_result
