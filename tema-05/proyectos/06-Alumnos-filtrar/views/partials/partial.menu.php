@@ -1,7 +1,7 @@
 <!-- menú principal Artículos -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">Clientes</a>
+        <a class="navbar-brand" href="index.php">Alumnos</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,19 +17,15 @@
                         Ordenar
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="order.php?criterio=id">Id</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=nombre">Nombre</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=apellidos">Apellidos</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=email">Email</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=telefono">Teléfono</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=direccion">Dirección</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=poblacion">Población</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=provincia">Provincia</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=nacionalidad">Nacionalidad</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=dni">DNI</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=edd">Edad</a></li>
-                        <li><a class="dropdown-item" href="order.php?criterio=curso">Curso</a></li>
-
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=1">Id</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=2">Nombre</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=3">Apellidos</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=4">Email</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=5">Teléfono</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=6">Nacionalidad</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=7">DNI</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=8">Edad</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=9">Curso</a></li>
                     </ul>
                 </li>
 
