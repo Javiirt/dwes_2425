@@ -6,25 +6,33 @@
 
 class Class_conexion
 {
+
     public $db;
 
     public function __construct(
-
+        
     ) {
         try {
+
             // realizo la conexión
             $this->db = new mysqli(SERVER, USER, PASS, BD);
 
         } catch (mysqli_sql_exception $e) {
+            // error de  base dedatos
+            include 'views/partials/errorDB.php';
 
-            include "views/partials/partial.errorDB.php";
-
-            //Cierro conexion
+            // cierro conexión
             $this->db->close();
 
-            //Cancelo ejecucion del programa
+            // cancelo ejecución programa
             exit();
+
         }
+
+
+
+
+
 
 
 

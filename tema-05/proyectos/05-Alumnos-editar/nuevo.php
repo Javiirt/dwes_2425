@@ -5,7 +5,7 @@
         descripción: muestra formulario añadir alumno
     */
 
-    #Archivos de configuracion
+    # Archivos de configuración
     include 'config/configDB.php';
 
     # Clases

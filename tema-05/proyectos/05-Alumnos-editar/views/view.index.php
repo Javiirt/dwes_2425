@@ -60,7 +60,7 @@
                     <?php endwhile; ?>   
                 </tbody>
                 <tfoot>
-                    <tr><td colspan="6">Nº Alumnos <?= $alumnos->num_rows ?></td></tr>
+                    <tr><td colspan="10">Nº Alumnos <?= $alumnos->num_rows ?></td></tr>
                 </tfoot>
             </table>
         </div>

@@ -2,31 +2,24 @@
 
     /*
         modelo: model.editar.php
-        descripción: carga los datos del libro que deseo actualizar
+        descripción: carga los detalles del alumno que deseo editar
 
         Método GET:
 
-            - indice de la tabla en la que se encuentra el libro
+            - id del alumno
     */
 
-    # Cargamos el indice del libro
-    $indice = $_GET['indice'];
+    # Cargamos el id del alumno
+    $id = $_GET['id'];
 
-    # Creo un objeto de la clase tabla de libros
-    $obj_tabla_libros = new Class_tabla_libros();
+    # Creo un objeto de la clase tabla alumnos
+    $tabla_alumnos = new Class_tabla_alumnos();
 
-    #  Cargo los datos de los libros
-    $obj_tabla_libros->getDatos();
+    # Cargo tabla de cursos
+    $cursos = $tabla_alumnos->getCursos();
+
+    # Obtener los detalles del alumno
+    // Objeto de la clase alumnos
+    $alumno = $tabla_alumnos->read($id);
+
     
-    # Cargo el array de materias - lista desplegable dinámica
-    $materias = $obj_tabla_libros->getMaterias();
-
-    # Cargo el array de etiquetas - lista checbox dinámica
-    $etiquetas = $obj_tabla_libros->getEtiquetas();
-
-    # Obtener el objeto de la clase artículo correspondiente a ese índice
-    $libro = $obj_tabla_libros->read($indice);
-
-    # Forma alternativa por la propiedad de no encapsulamiento
-    // $libro = $obj_tabla_libros->tabla[$indice];
-   

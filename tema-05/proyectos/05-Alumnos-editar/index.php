@@ -5,7 +5,7 @@
         descripción: muestra los detalles de los alumnos
     */
 
-    #Archivos de configuracion
+    # Archivos de configuración
     include 'config/configDB.php';
 
     # Clases

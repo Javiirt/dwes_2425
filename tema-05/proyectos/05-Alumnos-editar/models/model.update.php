@@ -1,75 +1,52 @@
 <?php
 
-/*
-    Modelo: model.update.php
-    Descripción: actualiza los datos del libro
+    /*
+        Modelo: model.update.php
+        Descripción: actualiza los datos del libro
 
-     Métod POST:
-        - id
-        - titulo
-        - autor
-        - editorial 
-        - fecha_edicion
-        - materia (indice)
-        - etiquetas (array)
-        - precio
-    
-    Método GET:
+         Métod POST:
+            - detalles del alumno
 
-        - indice (indice de la tabla correspondiente a dicho registro)
-*/
+        Método GET:
 
-# Símbolo monetario local
-setlocale(LC_MONETARY, "es_ES");
+            - id del alumno
+    */
 
-# Cargo el indice del  libro que voy a editar
-$indice = $_GET['indice'];
+    # Símbolo monetario local
+    setlocale(LC_MONETARY, "es_ES");
 
-# Cargo los detalles del  formulario
-$id = $_POST['id'];
-$titulo = $_POST['titulo'];
-$autor = $_POST['autor'];
-$editorial = $_POST['editorial'];
-$fecha_edicion = $_POST['fecha_edicion'];
-$materia = $_POST['materia'];
-$etiquetas = $_POST['etiquetas'];
-$precio = $_POST['precio'];
+    # Cargo el id del  libro que voy a editar
+    $id = $_GET['id'];
 
-# Crear un objeto de la clase libro a partir de los detalles del formulario
-$libro = new Class_libro(
-    $id,
-    $titulo,
-    $autor,
-    $editorial,
-    $fecha_edicion,
-    $materia,
-    $etiquetas,
-    $precio
-);
+    # Cargo los detalles del  formulario
+    $nombre = $_POST['nombre'];
+    $apellidos = $_POST['apellidos'];
+    $fechaNac = $_POST['fechaNac'];
+    $email = $_POST['email'];
+    $telefono = $_POST['telefono'];
+    $nacionalidad = $_POST['nacionalidad'];
+    $dni = $_POST['dni'];
+    $id_curso = $_POST['id_curso'];
 
-# Crear un objeto de la clase tabla_libros
-$obj_tabla_libros = new Class_tabla_libros();
+    # Validación
 
-# Cargo los libros
-$obj_tabla_libros->getDatos();
+    # Crear un objeto de la clase alumno a partir de los detalles del formulario
+    $alumno = new Class_alumno (
+        null,
+        $nombre,
+        $apellidos,
+        $email,
+        $telefono,
+        $nacionalidad,
+        $dni,
+        $fechaNac, 
+        $id_curso
+    );
 
-# Obtengo el array de materias
-$materias = $obj_tabla_libros->getMaterias();
+    # Actualizo los detalles del alumno en la tabla
+    $alumnos = new Class_tabla_alumnos();
 
-# Obtengo el  array de etiquetas
-$array_etiquetas = $obj_tabla_libros->getEtiquetas();
+    # Llamo aal método update de la clase tabla_alumnos
+    $alumnos->update($alumno, $id);
 
-# Actualizo los detalles del libro
-$obj_tabla_libros->update($libro, $indice);
-
-# comando alternativo por la  propiedad NO encapsulamiento
-$obj_tabla_libros->tabla[$indice] = $libro;
-
-# Obtener el array libros
-$array_libros = $obj_tabla_libros->tabla;
-
-
-
-
-
-
+    //exit();

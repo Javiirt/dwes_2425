@@ -18,8 +18,9 @@ class Class_tabla_alumnos extends Class_conexion
     public function getAlumnos()
     {
         try {
-            $sql = "
-            select 
+
+            // sentencia sql
+            $sql = "SELECT 
                 alumnos.id,
                 alumnos.nombre, 
                 alumnos.apellidos,
@@ -27,36 +28,34 @@ class Class_tabla_alumnos extends Class_conexion
                 alumnos.telefono,
                 alumnos.nacionalidad,
                 alumnos.dni,
-                timestampdiff(YEAR, alumnos.fechaNac, now()) as edad,
-                cursos.nombreCorto as curso
+                timestampdiff(YEAR, alumnos.fechaNac, NOW()) AS edad,
+                cursos.nombreCorto AS curso
             FROM 
                 alumnos 
             INNER JOIN
                 cursos
             ON alumnos.id_curso = cursos.id
-            ";
+            ORDER BY alumnos.id";
 
             // ejecuto comando sql
             $result = $this->db->query($sql);
 
             // obtengo un objeto de la clase mysqli_result
-            // devuelvo dicho objeto
             return $result;
-
         } catch (mysqli_sql_exception $e) {
 
-            include "views/partials/partial.errorDB.php";
+            // error de  base dedatos
+            include 'views/partials/errorDB.php';
 
-            //Libero result
-            $result->free();
+            // libero result
+            $result->close();
 
-            //Cierro conexion
+            // cierro conexión
             $this->db->close();
 
-            //Cancelo ejecucion del programa
+            // cancelo ejecución programa
             exit();
         }
-
     }
 
 
@@ -72,25 +71,25 @@ class Class_tabla_alumnos extends Class_conexion
     public function create(Class_alumno $alumno)
     {
         try {
+
             // Crear la sentencia preparada
             $sql = "
-            INSERT INTO 
-                alumnos( 
-                        nombre,
-                        apellidos,
-                        email,
-                        telefono,
-                        nacionalidad,
-                        dni, 
-                        fechaNac,
-                        id_curso
-                    )
-            VALUES    (?, ?, ?, ?, ?, ?, ?, ?)                            
-            ";
+        INSERT INTO 
+            alumnos( 
+                    nombre,
+                    apellidos,
+                    email,
+                    telefono,
+                    nacionalidad,
+                    dni, 
+                    fechaNac,
+                    id_curso
+                   )
+        VALUES    (?, ?, ?, ?, ?, ?, ?, ?)                            
+        ";
 
             // ejecuto la sentenecia preprada
             $stmt = $this->db->prepare($sql);
-
 
             // vinculación de parámetros
             $stmt->bind_param(
@@ -117,35 +116,72 @@ class Class_tabla_alumnos extends Class_conexion
 
             // ejecutamos
             $stmt->execute();
-
         } catch (mysqli_sql_exception $e) {
 
-            include "views/partials/partial.errorDB.php";
+            // error de  base dedatos
+            include 'views/partials/errorDB.php';
 
-            //Libero result
-            $result->free();
+            // libero sentencia preparada
+            $stmt->close();
 
-            //Cierro conexion
+            // cierro conexión
             $this->db->close();
 
-            //Cancelo ejecucion del programa
+            // cancelo ejecución programa
             exit();
         }
-
     }
 
     /*
         método: read()
-        descripcion: permite obtener el objeto de la clase libro a partir de un índice 
-        de la tabla
+        descripcion: permite obtener el objeto de la clase alumno a partir del id del alumno
 
         parámetros:
 
-            - $indice - índice de la tabla
+            - $id - id del tabla
     */
-    public function read($indice)
+    public function read($id)
     {
-        return $this->tabla[$indice];
+        try {
+
+            // Crear la sentencia preparada
+            $sql = "SELECT * FROM  alumnos WHERE id = ? LIMIT 1";
+
+            // Creo la sentencia preparada objeto clase mysqli_stmt
+            $stmt = $this->db->prepare($sql);
+
+            // vinculación de parámetros
+            $stmt->bind_param(
+                's',
+                $id
+            );
+
+            // ejecutamos
+            $stmt->execute();
+
+            // Devolver los detalles del alumno
+            $result = $stmt->get_result();
+
+            //return $result->fetch_all(MYSQLI_ASSOC);
+            return $result->fetch_object();
+
+        } catch (mysqli_sql_exception $e) {
+
+            // error de  base dedatos
+            include 'views/partials/errorDB.php';
+
+            // libero sentencia preparada
+            $stmt->close();
+
+            // Libero result
+            $result->close();
+
+            // cierro conexión
+            $this->db->close();
+
+            // cancelo ejecución programa
+            exit();
+        }
     }
 
     /*
@@ -157,9 +193,67 @@ class Class_tabla_alumnos extends Class_conexion
             - $libro - objeto de la clase libro, con los detalles actualizados de dicho artículo
             - $indice - índice de la tabla
     */
-    public function update(Class_libro $libro, $indice)
+    public function update(Class_alumno $alumno, $id)
     {
-        $this->tabla[$indice] = $libro;
+        try {
+
+            // Crear la sentencia preparada
+            $sql = "UPDATE alumnos SET
+                        nombre = ?,
+                        apellidos = ?,
+                        email = ?,
+                        telefono = ?,
+                        nacionalidad = ?,
+                        dni = ?, 
+                        fechaNac = ?,
+                        id_curso = ?
+                    WHERE 
+                        id = ?
+                    LIMIT 1";
+
+            // Ejecuto la sentenecia preprada
+            $stmt = $this->db->prepare($sql);
+
+            // vinculación de parámetros
+            $stmt->bind_param(
+                'sssisssii',
+                $nombre,
+                $apellidos,
+                $email,
+                $telefono,
+                $nacionalidad,
+                $dni,
+                $fechaNac,
+                $id_curso,
+                $id
+            );
+
+            // Asignamos los valores
+            $nombre = $alumno->nombre;
+            $apellidos = $alumno->apellidos;
+            $email = $alumno->email;
+            $telefono = $alumno->telefono;
+            $nacionalidad = $alumno->nacionalidad;
+            $dni = $alumno->dni;
+            $fechaNac = $alumno->fechaNac;
+            $id_curso = $alumno->id_curso;
+
+            // ejecutamos
+            $stmt->execute();
+        } catch (mysqli_sql_exception $e) {
+
+            // error de  base dedatos
+            include 'views/partials/errorDB.php';
+
+            // libero result
+            $stmt->close();
+
+            // cierro conexión
+            $this->db->close();
+
+            // cancelo ejecución programa
+            exit();
+        }
     }
 
 
