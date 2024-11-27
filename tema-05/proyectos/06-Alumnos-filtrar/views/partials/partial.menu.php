@@ -30,7 +30,7 @@
                 </li>
 
             </ul>
-            <form class="d-flex" role="search" action="filter.php" method="GET">
+            <form class="d-flex" role="search" action="filtrar.php" method="GET">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="expresion" required>
                 <button class="btn btn-outline-primary" type="submit">Buscar</button>
             </form>

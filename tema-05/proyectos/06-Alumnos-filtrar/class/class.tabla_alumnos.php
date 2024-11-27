@@ -368,5 +368,95 @@ class Class_tabla_alumnos extends Class_conexion
         }
 
     }
+
+    /*
+        método: filtrar()
+        descripcion: devuelve un objeto de la clase mysqli_result con los 
+        detalles de los alumnos filtrados por una expresion.
+
+        Parámetros:
+
+            - expresion
+    */
+
+    public function filtrar(string $expresion)
+    {
+        try {
+
+            // sentencia sql
+            $sql = "
+            select 
+                alumnos.id,
+                alumnos.nombre, 
+                alumnos.apellidos,
+                alumnos.email,
+                alumnos.telefono,
+                alumnos.nacionalidad,
+                alumnos.dni,
+                timestampdiff(YEAR, alumnos.fechaNac, now()) as edad,
+                cursos.nombreCorto as curso
+            FROM 
+                alumnos 
+            INNER JOIN
+                cursos
+            ON alumnos.id_curso = cursos.id
+            WHERE 
+                alumnos.id LIKE ?
+                OR alumnos.nombre LIKE ?
+                OR alumnos.apellidos LIKE ?
+                OR alumnos.email LIKE ?
+                OR alumnos.telefono LIKE ?
+                OR alumnos.nacionalidad LIKE ?
+                OR alumnos.dni LIKE ?
+                OR timestampdiff(YEAR, alumnos.fechaNac, now()) LIKE ?
+                OR cursos.nombreCorto LIKE ?
+        ;";
+
+            // ejecuto prepare
+            $stmt = $this->db->prepare($sql);
+
+            // vincular parámetros
+            $stmt->bind_param(
+                'sssssssss',
+                $expresion,
+                $expresion,
+                $expresion,
+                $expresion,
+                $expresion,
+                $expresion,
+                $expresion,
+                $expresion,
+                $expresion
+            );
+
+            // ejecutamos
+            $stmt->execute();
+
+            // Devolvemos objeto de la clase  mysqli_result
+            $result = $stmt->get_result();
+
+            // Devolvemos mysqli_result
+            return $result;
+
+        } catch (mysqli_sql_exception $e) {
+
+            // error de  base dedatos
+            include 'views/partials/errorDB.php';
+
+            // libero stmt
+            $stmt->close();
+
+            // libero result
+            $result->close();
+
+            // cierro conexión
+            $this->db->close();
+
+            // cancelo ejecución programa
+            exit();
+
+        }
+
+    }
 }
 
