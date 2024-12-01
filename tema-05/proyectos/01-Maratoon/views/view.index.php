@@ -24,8 +24,7 @@
                         <th>Corredor</th>
                         <th>Ciudad</th>
                         <th>Email</th>
-                        <th>Sexo</th>
-                        
+                        <th>Sexo</th>                        
                         <th>Categoria</th>
                         <th>Club</th>
                         <th class="text-end">Edad</th>

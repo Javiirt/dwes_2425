@@ -71,7 +71,7 @@ class Class_tabla_corredores extends Class_conexion
 
             - $corredor - objeto de la clase corredor
 
-    */
+    
     public function create(Class_corredor $corredor)
     {
         try {
@@ -134,7 +134,7 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }
+    }*/
 
     /*
         método: read()
@@ -143,7 +143,7 @@ class Class_tabla_corredores extends Class_conexion
         parámetros:
 
             - $id - id del corredor
-    */
+    
     public function read($id)
     {
         try {
@@ -185,7 +185,7 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }
+    }*/
 
     /*
         método: update()
@@ -195,7 +195,7 @@ class Class_tabla_corredores extends Class_conexion
 
             - $corredor - objeto de Class_corredor
             - $id - id del corredor
-    */
+    
     public function update(Class_corredor $corredor, $id)
     {
         try {
@@ -259,7 +259,7 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }
+    }*/
 
 
     /*
@@ -317,7 +317,7 @@ class Class_tabla_corredores extends Class_conexion
 
             - criterio: posición de la columna en la tabla corredores
                         por la que quiero ordenar
-    */
+    
 
     public function order(int $criterio)
     {
@@ -377,7 +377,7 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }
+    }*/
 
     /*
         método: order()
@@ -388,7 +388,7 @@ class Class_tabla_corredores extends Class_conexion
 
             - criterio: posición de la columna en la tabla corredores
                         por la que quiero ordenar
-    */
+    
 
     public function filter($expresion)
     {
@@ -466,7 +466,7 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }
+    }*/
 
     /*
         método: order()
@@ -477,7 +477,7 @@ class Class_tabla_corredores extends Class_conexion
 
             - criterio: posición de la columna en la tabla corredores
                         por la que quiero ordenar
-    */
+    
 
     public function delete(int $id)
     {
@@ -521,7 +521,7 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }
+    }*/
 
 
 }
