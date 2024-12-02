@@ -43,15 +43,15 @@
             <div class="mb-3">
                 <label class="form-label">Sexo</label><br>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sexo" id="masculino" value="masculino">
+                    <input class="form-check-input" type="radio" name="sexo" id="masculino" value="H">
                     <label class="form-check-label" for="masculino">Masculino</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sexo" id="femenino" value="femenino">
+                    <input class="form-check-input" type="radio" name="sexo" id="femenino" value="M">
                     <label class="form-check-label" for="femenino">Femenino</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sexo" id="otro" value="otro">
+                    <input class="form-check-input" type="radio" name="sexo" id="otro" value="">
                     <label class="form-check-label" for="otro">Sin especificar</label>
                 </div>
             </div>
@@ -64,7 +64,7 @@
             <!-- dni -->
             <div class="mb-3">
                 <label for="dni" class="form-label">Dni</label>
-                <input type="tel" class="form-control" name="dni">
+                <input type="text" class="form-control" name="dni">
             </div>
 
             <!-- Select Dinámico categorias -->

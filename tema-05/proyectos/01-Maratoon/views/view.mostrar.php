@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'views/layouts/layout.head.html'; ?>
-    <title>Mostrar Libro - CRUD Libros </title>
+    <title>Mostrar Corredor - CRUD Corredores </title>
 </head>
 
 <body>
@@ -13,62 +13,108 @@
         <!-- Encabezado proyecto -->
         <?php include 'views/partials/partial.header.php'; ?>
 
-        <legend>Formulario Mostrar Libro</legend>
+        <legend>Formulario Mostrar Corredor</legend>
 
-        <!-- Formulario Nuevo libro -->
+        <!-- Formulario Nuevo corredor -->
 
-        <form>
-
+        <form >
             <!-- id -->
             <div class="mb-3">
                 <label for="id" class="form-label">Id</label>
-                <input type="text" class="form-control" name="id" value="<?= $libro->id?>" disabled>
+                <input type="text" class="form-control" name="id" value="<?= $corredor->id?>" disabled>
             </div>
 
-            <!-- titulo -->
+            <!-- Nombre -->
             <div class="mb-3">
-                <label for="titulo" class="form-label">Titulo</label>
-                <input type="text" class="form-control" name="titulo" value="<?= $libro->titulo?>" disabled>
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" value="<?= $corredor->nombre ?>" disabled >
+            </div>
+            <!-- Apellidos -->
+            <div class="mb-3">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" name="apellidos" value="<?= $corredor->apellidos ?>" disabled>
+            </div>
+            <!-- Ciudad-->
+            <div class="mb-3">
+                <label for="ciudad" class="form-label">Ciudad</label>
+                <input type="text" class="form-control" name="ciudad" value="<?= $corredor->ciudad ?>" disabled>
+            </div>
+            <!-- Fecha Nacimiento -->
+            <div class="mb-3">
+                <label for="fechaNacimiento" class="form-label">Fecha Nacimiento</label>
+                <input type="date" class="form-control" name="fechaNacimiento" value="<?= $corredor->fechaNacimiento ?>" disabled>
+            </div>
+            <!-- sexo -->
+            <div class="mb-3">
+                <label class="form-label">Sexo</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sexo" id="masculino" value="H" <?= ( $corredor->sexo == 'H' )? 'checked' : null ?> disabled>
+                    <label class="form-check-label" for="masculino">Masculino</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sexo" id="femenino" value="M" <?= ( $corredor->sexo == 'M' )? 'checked' : null ?> disabled>
+                    <label class="form-check-label" for="femenino">Femenino</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sexo" id="otro" value="" <?= ( $corredor->sexo == '' )? 'checked' : null ?> disabled>
+                    <label class="form-check-label" for="otro">Sin especificar</label>
+                </div>
             </div>
 
-            <!-- autor -->
+            <!-- Email -->
             <div class="mb-3">
-                <label for="autor" class="form-label">Autor</label>
-                <input type="text" class="form-control" name="autor" value="<?= $libro->autor?>" disabled>
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" value="<?= $corredor->email ?>" disabled>
+            </div>
+            <!-- dni -->
+            <div class="mb-3">
+                <label for="dni" class="form-label">Dni</label>
+                <input type="text" class="form-control" name="dni" value="<?= $corredor->dni ?>" disabled>
             </div>
 
-            <!-- editorial -->
+            <!-- Select Dinámico categorias -->
             <div class="mb-3">
-                <label for="editorial" class="form-label">Editorial</label>
-                <input type="text" class="form-control" name="editorial" value="<?= $libro->editorial?>" disabled>
+                <label for="categoria" class="form-label">Categoria</label>
+                <select class="form-select" name="id_categoria" disabled>
+                    <option selected disabled>Seleccione Categoria</option>
+                    <!-- mostrar lista categorias -->
+                    <?php foreach ($categorias as $data): ?>
+                        <option value="<?= $data['id'] ?>" 
+                        <?= ( $corredor->id_categoria == $data['id'] )? 'selected' : null ?>>
+                            <?= $data['categoria'] ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <!-- Select Dinámico club -->
+            <div class="mb-3">
+                <label for="club" class="form-label">Club</label>
+                <select class="form-select" name="id_club" disabled>
+                    <option selected disabled>Seleccione Club</option>
+                    <!-- mostrar lista clubes -->
+                    <?php foreach ($clubs as $data): ?>
+                        <option value="<?= $data['id'] ?>" <?= ( $corredor->id_club == $data['id'] )? 'selected' : null ?>>
+                            <?= $data['club'] ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
 
-            <!-- fecha_edicion -->
+            <!-- Campo Mostar categoria
             <div class="mb-3">
-                <label for="fecha_edicion" class="form-label">Fecha Edición</label>
-                <input type="date" class="form-control" name="fecha_edicion" value="<?= $libro->fecha_edicion?>" disabled>
+                <label for="categoria" class="form-label">Categoria</label>
+                <input type="text" class="form-control" name="categoria" value="<?= $tabla_corredores->getNombreCategoria($corredor->id_categoria)->nombreCorto ?>" disabled>
             </div>
 
-            <!-- Precio -->
+             Campo Mostar club
             <div class="mb-3">
-                <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $libro->precio?>" disabled>
-            </div>
-
-            <!-- Campo Mostar -->
-            <div class="mb-3">
-                <label for="materia" class="form-label">Materia</label>
-                <input type="text" class="form-control" name="materia" value="<?= $materias[$libro->materia]?>" disabled>
-            </div>
-
-            <!-- Campo Etiquetas -->
-            <div class="mb-3">
-                <label for="etiquetas" class="form-label">Etiquetas</label>
-                <input type="text" class="form-control" name="etiquetas" value="<?= implode(', ', $obj_tabla_libros->mostrar_nombre_etiquetas($libro->etiquetas)) ?>" disabled>
-            </div>
+                <label for="club" class="form-label">Club</label>
+                <input type="text" class="form-control" name="club" value="<?= $tabla_corredores->getNombreClub($corredor->id_club)->nombreCorto ?>" disabled>
+            </div> -->
+            
 
             <!-- botones de acción -->
-            <a class="btn btn-primary" href="index.php" role="button">Cancelar</a>
+            <a class="btn btn-primary" href="index.php" role="button">Volver</a>
 
         </form>
 

@@ -71,7 +71,7 @@ class Class_tabla_corredores extends Class_conexion
 
             - $corredor - objeto de la clase corredor
 
-    
+    */
     public function create(Class_corredor $corredor)
     {
         try {
@@ -82,14 +82,16 @@ class Class_tabla_corredores extends Class_conexion
             corredores( 
                     nombre,
                     apellidos,
+                    ciudad,
+                    fechaNacimiento,
+                    sexo,
                     email,
-                    telefono,
-                    nacionalidad,
-                    dni, 
-                    fechaNac,
-                    id_categoria
+                    dni,
+                    edad,
+                    id_categoria,
+                    id_club
                    )
-        VALUES    (?, ?, ?, ?, ?, ?, ?, ?)                            
+        VALUES    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)                            
         ";
 
             // ejecuto la sentenecia preprada
@@ -97,26 +99,30 @@ class Class_tabla_corredores extends Class_conexion
 
             // vinculación de parámetros
             $stmt->bind_param(
-                'sssisssi',
+                'sssssssiii',
                 $nombre,
                 $apellidos,
+                $ciudad,
+                $fechaNacimiento,
+                $sexo,
                 $email,
-                $telefono,
-                $nacionalidad,
                 $dni,
-                $fechaNac,
-                $id_categoria
+                $edad,
+                $id_categoria,
+                $id_club
             );
 
             // asignar valores
             $nombre = $corredor->nombre;
             $apellidos = $corredor->apellidos;
+            $ciudad = $corredor->ciudad;
+            $fechaNacimiento = $corredor->fechaNacimiento;
+            $sexo = $corredor->sexo;
             $email = $corredor->email;
-            $telefono = $corredor->telefono;
-            $nacionalidad = $corredor->nacionalidad;
             $dni = $corredor->dni;
-            $fechaNac = $corredor->fechaNac;
+            $edad = $corredor->edad();
             $id_categoria = $corredor->id_categoria;
+            $id_club = $corredor->id_club;
 
             // ejecutamos
             $stmt->execute();
@@ -134,7 +140,7 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }*/
+    }
 
     /*
         método: read()
@@ -143,7 +149,7 @@ class Class_tabla_corredores extends Class_conexion
         parámetros:
 
             - $id - id del corredor
-    
+    */
     public function read($id)
     {
         try {
@@ -185,7 +191,8 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }*/
+    }
+
 
     /*
         método: update()
@@ -195,7 +202,7 @@ class Class_tabla_corredores extends Class_conexion
 
             - $corredor - objeto de Class_corredor
             - $id - id del corredor
-    
+    */
     public function update(Class_corredor $corredor, $id)
     {
         try {
@@ -205,12 +212,14 @@ class Class_tabla_corredores extends Class_conexion
             UPDATE corredores SET 
                     nombre = ?,
                     apellidos = ?,
+                    ciudad = ?,
+                    fechaNacimiento = ?,
+                    sexo = ?,
                     email = ?,
-                    telefono = ?,
-                    nacionalidad = ?,
-                    dni = ?, 
-                    fechaNac = ?,
-                    id_categoria = ?
+                    dni = ?,
+                    edad = ?,
+                    id_categoria = ?,                    
+                    id_club = ?
             WHERE 
                     id = ?
             LIMIT 1                            
@@ -221,27 +230,32 @@ class Class_tabla_corredores extends Class_conexion
 
             // vinculación de parámetros
             $stmt->bind_param(
-                'sssisssii',
+                'sssssssiiii',
                 $nombre,
                 $apellidos,
+                $ciudad,
+                $fechaNacimiento,
+                $sexo,
                 $email,
-                $telefono,
-                $nacionalidad,
                 $dni,
-                $fechaNac,
+                $edad,
                 $id_categoria,
-                $id
+                $id_club,
+                $id_corredor
             );
 
             // asignar valores
             $nombre = $corredor->nombre;
             $apellidos = $corredor->apellidos;
+            $ciudad = $corredor->ciudad;
+            $fechaNacimiento = $corredor->fechaNacimiento;
+            $sexo = $corredor->sexo;
             $email = $corredor->email;
-            $telefono = $corredor->telefono;
-            $nacionalidad = $corredor->nacionalidad;
             $dni = $corredor->dni;
-            $fechaNac = $corredor->fechaNac;
+            $edad = $corredor->edad();
             $id_categoria = $corredor->id_categoria;
+            $id_club = $corredor->id_club;
+            $id_corredor = $id;
 
             // ejecutamos
             $stmt->execute();
@@ -259,7 +273,7 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }*/
+    }
 
 
     /*
@@ -317,7 +331,7 @@ class Class_tabla_corredores extends Class_conexion
 
             - criterio: posición de la columna en la tabla corredores
                         por la que quiero ordenar
-    
+    */
 
     public function order(int $criterio)
     {
@@ -329,17 +343,19 @@ class Class_tabla_corredores extends Class_conexion
                 corredores.id,
                 corredores.nombre, 
                 corredores.apellidos,
+                corredores.ciudad,
                 corredores.email,
-                corredores.telefono,
-                corredores.nacionalidad,
-                corredores.dni,
-                timestampdiff(YEAR, corredores.fechaNac, now()) as edad,
-                categorias.nombreCorto as categoria
+                corredores.edad,
+                categorias.nombre as categoria,
+                clubs.nombre as club
             FROM 
                 corredores 
             INNER JOIN
                 categorias
             ON corredores.id_categoria = categorias.id
+            INNER JOIN
+                clubs
+            ON corredores.id_club = clubs.id
             ORDER BY ?
         ";
 
@@ -377,18 +393,17 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }*/
+    }
 
     /*
-        método: order()
+        método: filter()
         descripcion: devuelve un objeto de la clase mysqli_result con los 
-        detalles de los corredores  ordenados por un criterio.
+        detalles de los corredores  ordenados por una expresion.
 
         Parámetros:
 
-            - criterio: posición de la columna en la tabla corredores
-                        por la que quiero ordenar
-    
+            - expresion
+    */
 
     public function filter($expresion)
     {
@@ -396,43 +411,44 @@ class Class_tabla_corredores extends Class_conexion
 
             // sentencia sql
             $sql = "
-            select 
+            SELECT 
                 corredores.id,
-                corredores.nombre, 
-                corredores.apellidos,
+                CONCAT_WS(', ', corredores.apellidos, corredores.nombre) AS corredor,
+                corredores.ciudad,
                 corredores.email,
-                corredores.telefono,
-                corredores.nacionalidad,
-                corredores.dni,
-                timestampdiff(YEAR, corredores.fechaNac, now()) as edad,
-                categorias.nombreCorto as categoria
+                corredores.sexo,
+                TIMESTAMPDIFF(YEAR, corredores.fechaNacimiento, NOW()) AS edad,
+                categorias.nombre AS categoria,
+                clubs.nombre AS club
             FROM 
                 corredores 
             INNER JOIN
                 categorias
             ON corredores.id_categoria = categorias.id
+            INNER JOIN
+                clubs
+            ON corredores.id_club = clubs.id
             WHERE 
-            CONCAT_WS(' ',
-                        corredores.id, 
-                        corredores.nombre,
-                        corredores.apellidos, 
-                        corredores.email, 
-                        corredores.telefono, 
-                        corredores.nacionalidad, 
-                        corredores.dni, 
-                        TIMESTAMPDIFF(YEAR, corredores.fechaNac, NOW()),
-                        corredores.fechaNac, 
-                        categorias.nombreCorto) 
-            LIKE ?
-
-            ORDER BY corredores.id
+                CONCAT_WS(' ',
+                    corredores.id,
+                    corredores.apellidos,
+                    corredores.nombre,
+                    corredores.ciudad,
+                    corredores.email,
+                    corredores.sexo,
+                    TIMESTAMPDIFF(YEAR, corredores.fechaNacimiento, NOW()),
+                    categorias.nombre,
+                    clubs.nombre
+                ) LIKE ?
+            ORDER BY 
+                corredores.id;
         ";
 
             // ejecuto prepare
             $stmt = $this->db->prepare($sql);
 
             // arreglamos expresión para operador like
-            $expresion = '%'.$expresion.'%';
+            $expresion = '%' . $expresion . '%';
 
             // vincular parámetros
             $stmt->bind_param(
@@ -448,7 +464,6 @@ class Class_tabla_corredores extends Class_conexion
 
             // Devolvemos mysqli_result
             return $result;
-            
         } catch (mysqli_sql_exception $e) {
 
             // error de  base dedatos
@@ -466,22 +481,35 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }*/
+    }
 
     /*
-        método: order()
-        descripcion: devuelve un objeto de la clase mysqli_result con los 
-        detalles de los corredores  ordenados por un criterio.
+        método: delete()
 
         Parámetros:
 
-            - criterio: posición de la columna en la tabla corredores
-                        por la que quiero ordenar
-    
+            - id
+    */
 
     public function delete(int $id)
     {
         try {
+
+            // sentencia sql
+            $sql = "DELETE FROM registros WHERE id_corredor = ? LIMIT 1";
+
+            // ejecuto prepare
+            $stmt = $this->db->prepare($sql);
+
+            // vincular parámetros
+            $stmt->bind_param(
+                'i',
+                $id
+            );
+
+            // ejecutamos
+            $stmt->execute();
+
 
             // sentencia sql
             $sql = "DELETE FROM corredores WHERE id = ? LIMIT 1";
@@ -503,7 +531,6 @@ class Class_tabla_corredores extends Class_conexion
 
             // Devolvemos mysqli_result
             return $result;
-            
         } catch (mysqli_sql_exception $e) {
 
             // error de  base dedatos
@@ -521,7 +548,5 @@ class Class_tabla_corredores extends Class_conexion
             // cancelo ejecución programa
             exit();
         }
-    }*/
-
-
+    }
 }

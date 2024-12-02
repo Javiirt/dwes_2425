@@ -6,27 +6,27 @@
 
         Método GET:
 
-            - indice de la tabla en la que se encuentra el libro
+            - id de la tabla en la que se encuentra el libro
     */
 
-    # Cargamos el indice del libro
-    $indice = $_GET['indice'];
+    # Cargamos el id del libro
+    $id = $_GET['id'];
 
-    # Creo un objeto de la clase tabla de libros
-    $obj_tabla_libros = new Class_tabla_libros();
+    # Creo un objeto de la clase tabla de corredores
+    $tabla_corredores = new Class_tabla_corredores();
 
-    #  Cargo los datos de los libros
-    $obj_tabla_libros->getDatos();
+    #  Cargo los datos de los corredores
+    $tabla_corredores->getCorredores();
     
-    # Cargo el array de materias - lista desplegable dinámica
-    $materias = $obj_tabla_libros->getMaterias();
+    # Cargo el array de categorias - lista desplegable dinámica
+    $categorias = $tabla_corredores->getCategorias();
 
-    # Cargo el array de etiquetas - lista checbox dinámica
-    $etiquetas = $obj_tabla_libros->getEtiquetas();
+    # Cargo el array de clubs - lista checbox dinámica
+    $clubs = $tabla_corredores->getClubs();
 
     # Obtener el objeto de la clase artículo correspondiente a ese índice
-    $libro = $obj_tabla_libros->read($indice);
+    $corredor = $tabla_corredores->read($id);
 
     # Forma alternativa por la propiedad de no encapsulamiento
-    // $libro = $obj_tabla_libros->tabla[$indice];
+    // $libro = $obj_tabla_corredores->tabla[$id];
    
