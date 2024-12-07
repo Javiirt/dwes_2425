@@ -2,20 +2,16 @@
 
 /*
     Modelo: model.update.php
-    Descripción: actualiza los datos del cliente
+    Descripción: actualiza los datos de la cuenta
 
-     Métod POST:
-        
-        - nombre
-        - apellidos
-        - ciudad
-        - telefono
-        - dni
-        - email
+    Métod POST (cuenta):
+            - num_cuenta
+            - id_cliente
+            - saldo
     
     Método GET:
 
-        - id del cliente
+        - id de la cuenta
 */
 
 # Símbolo monetario local
@@ -25,37 +21,25 @@ setlocale(LC_MONETARY, "es_ES");
 $id = $_GET['id'];
 
 # Cargo los detalles del  formulario
-$nombre = $_POST['nombre'];
-$apellidos = $_POST['apellidos'];
-$ciudad = $_POST['ciudad'];
-$telefono = $_POST['telefono'];
-$dni = $_POST['dni'];
-$email = $_POST['email'];
+$num_cuenta = $_POST['num_cuenta'];
+$id_cliente = $_POST['id_cliente'];
+$saldo = $_POST['saldo'];
 
-# Validación
 
- # Creamos objeto de la clase Class_alumno
- $cliente = new Class_cliente (
-        $id,
-        $apellidos,
-        $nombre,
-        $telefono,
-        $ciudad,
-        $dni,
-        $email
+
+# Creamos objeto de la clase Class_cuenta
+$cuenta = new Class_cuenta(
+    null,
+    $num_cuenta,
+    $id_cliente,
+    null,
+    null,
+    $saldo
 );
 
-# Conecto con la base de datos gesbank
-$conexion = new Class_tabla_clientes();
+# Actualizamos la cuenta
+$conexion = new Class_tabla_cuentas();
 
-# Llamo al método update de Class_tabla_clientes
-$conexion->update($cliente, $id);
-
-
-
-
-
-
-
+$conexion->update($cuenta, $id);
 
 

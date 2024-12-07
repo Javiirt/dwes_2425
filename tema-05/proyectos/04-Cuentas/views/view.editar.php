@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'views/layouts/layout.head.html'; ?>
-    <title>Editar Cliente - GESBANK </title>
+    <title>Editar Cuenta - GESBANK </title>
 </head>
 
 <body>
@@ -13,49 +13,53 @@
         <!-- Encabezado proyecto -->
         <?php include 'views/partials/partial.header.php'; ?>
 
-        <legend>Formulario Edición Cliente</legend>
+        <legend>Formulario Editar Cuenta</legend>
 
-        <!-- Formulario Editar cliente -->
+        <!-- Formulario Nuevo Cuenta -->
 
-        <form action="update.php?id=<?= $id ?>" method="POST">
+        <form action="update.php?id=<?= $cuenta->id ?>" method="POST">
 
-            <!-- Nombre -->
+            <!-- id -->
             <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?= $cliente->nombre ?>">
+                <label for="id" class="form-label">ID</label>
+                <input type="number" class="form-control" step="1" value="<?= $cuenta->id ?>" disabled>
             </div>
-            <!-- Apellidos -->
+
+            <!-- num_cuenta -->
             <div class="mb-3">
-                <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos" value="<?= $cliente->apellidos ?>">
+                <label for="num_cuenta" class="form-label">Número de cuenta</label>
+                <input type="number" class="form-control" name="num_cuenta" step="1" value="<?= $cuenta->num_cuenta ?>"
+                    required>
             </div>
-            <!-- Ciudad -->
+
+            <!-- Select Dinámico clientes -->
             <div class="mb-3">
-                <label for="ciudad" class="form-label">ciudad</label>
-                <input type="text" class="form-control" name="ciudad" value="<?= $cliente->ciudad ?>">
+                <label for="cliente" class="form-label">Cliente</label>
+                <select class="form-select" name="id_cliente" required>
+                    <option selected required>Seleccione cliente</option>
+                    <!-- Editar lista cursos -->
+                    <?php foreach ($clientes as $cliente): ?>
+                        <option value="<?= $cliente->id ?>" <?= ($cliente->id == $cuenta->id_cliente) ? 'selected' : null ?>>
+                            <?= $cliente->cliente ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-            <!-- Telefono -->
+
+            <!-- saldo -->
             <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" name="telefono" value="<?= $cliente->telefono ?>">
+                <label for="saldo" class="form-label">Saldo</label>
+                <input type="number" class="form-control" name="saldo" step="0.01" value="<?= $cuenta->saldo ?>"
+                    required>
             </div>
-            <!-- Dni -->
-            <div class="mb-3">
-                <label for="dni" class="form-label">Dni</label>
-                <input type="text" class="form-control" name="dni" value="<?= $cliente->dni ?>">
-            </div>
-            <!-- Email -->
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" value="<?= $cliente->email ?>">
-            </div>
+
             <!-- botones de acción -->
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
             <button type="reset" class="btn btn-danger">Borrar</button>
             <button type="submit" class="btn btn-primary">Actualizar</button>
 
         </form>
-        <!-- Fin formulario nuevo artículo -->
+        <!-- Fin formulario nuevo Cuenta -->
     </div>
     <br><br><br>
 

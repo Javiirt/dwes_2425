@@ -2,18 +2,18 @@
 
 /*
         modelo: model.eliminar.php
-        descripción: elimina cliente de la tabla
+        descripción: elimina una cuenta de la tabla
         
         Método GET:
 
-            - id: id del cliente
+            - id: id de la cuenta
     */
 
-# Cargamos el id del alumno que vamos a editar
+# Cargamos el id de la cuenta uqe vamos a eliminar
 $id = $_GET['id'];
 
 # Conecto con la base de datos gesbank
-$conexion = new Class_tabla_clientes();
+$conexion = new Class_tabla_cuentas();
 
-# Eliminar cliente
-$cliente = $conexion->delete($id);
+# Eliminar cuenta
+$conexion->delete($id);

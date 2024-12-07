@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'views/layouts/layout.head.html'; ?>
-    <title>Nuevo Cliente - GESBANK </title>
+    <title>Nueva Cuenta - GESBANK </title>
 </head>
 
 <body>
@@ -13,41 +13,36 @@
         <!-- Encabezado proyecto -->
         <?php include 'views/partials/partial.header.php'; ?>
 
-        <legend>Formulario Nuevo Cliente</legend>
+        <legend>Formulario Nueva Cuenta</legend>
 
-        <!-- Formulario Nuevo cliente -->
+        <!-- Formulario Nuevo Cuenta -->
 
         <form action="create.php" method="POST">
 
-            <!-- Nombre -->
+            <!-- num_cuenta -->
             <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre">
+                <label for="num_cuenta" class="form-label">Número de cuenta</label>
+                <input type="number" class="form-control" name="num_cuenta" step="1" required>
             </div>
-            <!-- Apellidos -->
+
+            <!-- Select Dinámico clientes -->
             <div class="mb-3">
-                <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos">
+                <label for="cliente" class="form-label">Cliente</label>
+                <select class="form-select" name="id_cliente" required>
+                    <option selected disabled>Seleccione cliente</option>
+                    <!-- mostrar lista cursos -->
+                    <?php foreach ($clientes as $cliente): ?>
+                        <option value="<?= $cliente->id ?>">
+                            <?= $cliente->cliente ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-            <!-- Ciudad -->
+            
+            <!-- saldo -->
             <div class="mb-3">
-                <label for="ciudad" class="form-label">ciudad</label>
-                <input type="text" class="form-control" name="ciudad">
-            </div>
-            <!-- Telefono -->
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" name="telefono">
-            </div>
-            <!-- Dni -->
-            <div class="mb-3">
-                <label for="dni" class="form-label">Dni</label>
-                <input type="text" class="form-control" name="dni">
-            </div>
-            <!-- Email -->
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email">
+                <label for="saldo" class="form-label">Saldo</label>
+                <input type="number" class="form-control" name="saldo" step="0.01" required>
             </div>
 
             <!-- botones de acción -->
@@ -56,7 +51,7 @@
             <button type="submit" class="btn btn-primary">Enviar</button>
 
         </form>
-        <!-- Fin formulario nuevo cliente -->
+        <!-- Fin formulario nuevo Cuenta -->
     </div>
     <br><br><br>
 

@@ -1,27 +1,27 @@
 <?php
 
-    /*
-        controlador: create.php
-        descripción: añade nuevo cliente a la tabla
+/*
+    controlador: create.php
+    descripción: añade nueva cuenta a la tabla
 
-        Método POST:
+    Método POST:
 
-            - detalles del cliente
-    */
+        - detalles de la cuenta
+*/
 
-    # Archivos de configuración
-    include 'config/configDB.php';
-    
-    # Clases
-    include 'class/class.cliente.php';
-    include 'class/class.conexion.php';
-    include 'class/class.tabla_clientes.php';
+# Archivos de configuración
+include 'config/configDB.php';
 
-    # Librerias
+# Clases
+include 'class/class.cuenta.php';
+include 'class/class.conexion.php';
+include 'class/class.tabla_cuentas.php';
 
-    # Model
-    include 'models/model.create.php';
+# Librerias
 
-    # Vista
-    # Redirecciono al controlador index
-    header("location: index.php");
+# Model
+include 'models/model.create.php';
+
+# Vista
+# Redirecciono al controlador index
+header("location: index.php");

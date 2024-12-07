@@ -1,20 +1,22 @@
 <?php
 
-    /*
-        modelo: model.mostrar.php
-        descripción: carga los datos del cliente que deseo mostrar
+/*
+    modelo: model.mostrar.php
+    descripción: carga los datos de la cuenta que deseo mostrar
 
-        Método GET:
+    Método GET:
 
-            - id del cliente
-    */
+        - id de la cuenta
+*/
 
-    # Cargamos el id del cliente que vamos a mostrar
-    $id = $_GET['id'];
+# Cargamos el id de la cuenta que vamos a mostrar
+$id = $_GET['id'];
 
-    # Creo un objeto de la clase tabla clientes
-    $conexion = new Class_tabla_clientes();
+# Creo un objeto de la clase tabla cuentas
+$conexion = new Class_tabla_cuentas();
 
-    # Obtener los detalles del cliente 
-    // objeto de la clase cliente
-    $cliente = $conexion->read($id);
+# Obtener los detalles de la cuenta 
+$cuenta = $conexion->read($id);
+
+# Creo una lista de clientes
+$clientes = $conexion->getClientes();

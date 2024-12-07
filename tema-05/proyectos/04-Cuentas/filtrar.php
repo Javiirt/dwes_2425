@@ -1,22 +1,22 @@
 <?php
 
-    /*
-        controlador: filtrar.php
-        descripción: muestra los clientes que cumplen una expresión de búsqueda
-    */
+/*
+    controlador: filtrar.php
+    descripción: muestra las ceuntas que cumplen una expresión de búsqueda
+*/
 
-    # Archivos de configuración
-    include 'config/configDB.php';
+# Archivos de configuración
+include 'config/configDB.php';
 
-    # Clases
-    include 'class/class.cliente.php';
-    include 'class/class.conexion.php';
-    include 'class/class.tabla_clientes.php';
+# Clases
+include 'class/class.cuenta.php';
+include 'class/class.conexion.php';
+include 'class/class.tabla_cuentas.php';
 
-    # Librerias
+# Librerias
 
-    # Model
-    include 'models/model.filtrar.php';
+# Model
+include 'models/model.filtrar.php';
 
-    # Vista
-    include 'views/view.index.php';
+# Vista
+include 'views/view.index.php';

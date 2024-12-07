@@ -1,40 +1,33 @@
 <?php
-    /*
-        apellidos: model.create.php
-        descripción: añade el nuevo cliente a la tabla
+/*
+    apellidos: model.create.php
+    descripción: añade la nueva cuenta a la tabla
+    
+    Métod POST (cuenta):
+        - num_cuenta
+        - id_cliente
+        - saldo
         
-        Métod POST (cliente):
-            - nombre
-            - apellidos
-            - ciudad
-            - telefono
-            - dni
-            - emial
-            
-    */
+*/
 
-    # Cargo los detalles del  formulario
-    $nombre = $_POST['nombre'];
-    $apellidos = $_POST['apellidos'];
-    $ciudad = $_POST['ciudad'];
-    $telefono = $_POST['telefono'];
-    $dni = $_POST['dni'];
-    $email = $_POST['email'];
+# Cargo los detalles del  formulario
+$num_cuenta = $_POST['num_cuenta'];
+$id_cliente = $_POST['id_cliente'];
+$saldo = $_POST['saldo'];
 
-    # Validación
 
-    # Creamos objeto de la clase Class_cliente
-    $cliente = new Class_cliente(
-        null,
-        $apellidos,
-        $nombre,
-        $telefono,
-        $ciudad,
-        $dni,
-        $email
-    );
 
-    # Añadimos cliente a la tabla
-    $conexion = new Class_tabla_clientes();
+# Creamos objeto de la clase Class_cuenta
+$cuenta = new Class_cuenta(
+    null,
+    $num_cuenta,
+    $id_cliente,
+    null,
+    null,
+    $saldo
+);
 
-    $conexion->create($cliente);
+# Añadimos cuenta a la tabla
+$conexion = new Class_tabla_cuentas();
+
+$conexion->create($cuenta);

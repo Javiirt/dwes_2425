@@ -1,21 +1,21 @@
 <?php
 /*
         controlador: mostrar.php
-        descripción: muestra los detalles de un libro sin edición
+        descripción: muestra los detalles de una cuenta
 
         parámetros:
 
             - Método GET:
-                - indice donde se ecuentra el libro dentro de la tabla
+                - id de la cuenta
     */
 
 # Archivos de configuración
 include 'config/configDB.php';
 
 # Clases
-include 'class/class.cliente.php';
+include 'class/class.cuenta.php';
 include 'class/class.conexion.php';
-include 'class/class.tabla_clientes.php';
+include 'class/class.tabla_cuentas.php';
 
 # Librerias
 

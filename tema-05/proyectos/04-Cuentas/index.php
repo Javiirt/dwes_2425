@@ -1,22 +1,22 @@
 <?php
 
-    /*
-        controlador: index.php
-        descripción: muestra los detalles de los alumnos
-    */
+/*
+    controlador: index.php
+    descripción: muestra los detalles de las cuentas
+*/
 
-    # Archivos de configuración
-    include 'config/configDB.php';
+# Archivos de configuración
+include 'config/configDB.php';
 
-    # Clases
-    include 'class/class.cliente.php';
-    include 'class/class.conexion.php';
-    include 'class/class.tabla_clientes.php';
+# Clases
+include 'class/class.cuenta.php';
+include 'class/class.conexion.php';
+include 'class/class.tabla_cuentas.php';
 
-    # Librerias
+# Librerias
 
-    # Model
-    include 'models/model.index.php';
+# Model
+include 'models/model.index.php';
 
-    # Vista
-    include 'views/view.index.php';
+# Vista
+include 'views/view.index.php';

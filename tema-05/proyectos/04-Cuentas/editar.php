@@ -1,26 +1,26 @@
 <?php
-    /*
-        controlador: editar.php
-        descripción: muestra los detalles de cliente en modo edición
+/*
+    controlador: editar.php
+    descripción: muestra los detalles de la cuenta en modo edición
 
-        parámetros:
+    parámetros:
 
-            - Método GET:
-                - id - cliente
-    */
+        - Método GET:
+            - id - cuenta
+*/
 
-    # Archivos de configuración
-    include 'config/configDB.php';
+# Archivos de configuración
+include 'config/configDB.php';
 
-    # Clases
-    include 'class/class.cliente.php';
-    include 'class/class.conexion.php';
-    include 'class/class.tabla_clientes.php';
+# Clases
+include 'class/class.cuenta.php';
+include 'class/class.conexion.php';
+include 'class/class.tabla_cuentas.php';
 
-    # Librerias
+# Librerias
 
-    # Model
-    include 'models/model.editar.php';
+# Model
+include 'models/model.editar.php';
 
-    # Vista
-    include 'views/view.editar.php';
+# Vista
+include 'views/view.editar.php';
