@@ -87,13 +87,13 @@ class Class_tabla_cuentas extends Class_conexion
             $stmt = $this->pdo->prepare($sql);
 
             // establezco tipo de fetch
-            $stmt->setFetchMode(PDO::FETCH_OBJ);
+            $stmt->setFetchMode(PDO::FETCH_OBJ); //PDO::FETCH_KEY_PAIR
 
             // ejectuto
             $stmt->execute();
 
             // devuelvo objeto clase pdostatement
-            return $stmt;
+            return $stmt; //return $stmt->fetchAll();
 
         } catch (PDOException $e) {
 

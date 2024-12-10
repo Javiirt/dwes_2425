@@ -38,8 +38,8 @@
                             <td><?= $cuenta->id ?></td>
                             <td><?= $cuenta->num_cuenta ?></td>
                             <td><?= $cuenta->cliente ?></td>
-                            <td><?= $cuenta->fecha_alta ?></td>
-                            <td><?= $cuenta->fecha_ul_mov ?></td>
+                            <td><?= date('d/m/Y' , strtotime($cuenta->fecha_alta)) ?></td>
+                            <td><?=  date('d/m/Y' , strtotime($cuenta->fecha_ul_mov)) ?></td>
                             <td class='text-end'><?= number_format($cuenta->saldo, 2, ',', '.') ?>€</td>                               
                             <!-- Columna de acciones -->
                             <td>

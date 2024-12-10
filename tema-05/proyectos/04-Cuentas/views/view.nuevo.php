@@ -31,7 +31,7 @@
                 <select class="form-select" name="id_cliente" required>
                     <option selected disabled>Seleccione cliente</option>
                     <!-- mostrar lista cursos -->
-                    <?php foreach ($clientes as $cliente): ?>
+                    <?php foreach ($clientes as $cliente): ?> <!-- Con FETCH_KEY_PAIR->  foreach ($clientes as $indice => $data) -->
                         <option value="<?= $cliente->id ?>">
                             <?= $cliente->cliente ?>
                         </option>
@@ -44,6 +44,8 @@
                 <label for="saldo" class="form-label">Saldo</label>
                 <input type="number" class="form-control" name="saldo" step="0.01" required>
             </div>
+
+
 
             <!-- botones de acción -->
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
