@@ -81,4 +81,14 @@ include 'models/model.eliminar.php';
 header("location: index.php");
 
 
+public function edad()
+    {
+        $fechaActual = new DateTime(); // Fecha actual
+        $fechaNacimiento = new DateTime($this->fechaNac); // Fecha de nacimiento
+        $edad = $fechaNacimiento->diff($fechaActual); // Diferencia entre las fechas
+        return $edad->y; // Devuelve solo los años
+
+    }
+
+    date('d/m/Y' , strtotime($cuenta->fecha_alta))
 */
