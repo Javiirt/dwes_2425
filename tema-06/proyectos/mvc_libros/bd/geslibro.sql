@@ -124,7 +124,7 @@ INSERT INTO Editoriales (id, nombre, direccion, poblacion, provincia_id, c_posta
 DROP TABLE IF EXISTS autores;
 CREATE TABLE autores (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(40),
+    nombre VARCHAR(80),
     nacionalidad VARCHAR(20),
     email VARCHAR(45) UNIQUE,
     fecha_nac DATETIME,
