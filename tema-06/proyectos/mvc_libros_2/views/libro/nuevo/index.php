@@ -29,7 +29,7 @@
                     <!-- titulo -->
                     <div class="mb-3">
                         <label for="titulo" class="form-label">Titulo</label>
-                        <input type="text" class="form-control" name="titulo">
+                        <input type="text" class="form-control" name="titulo" required>
                     </div>
                     <!-- Select Dinámico autores -->
                     <div class="mb-3">
@@ -60,23 +60,23 @@
                     <!-- precio -->
                     <div class="mb-3">
                         <label for="precio" class="form-label">Precio</label>
-                        <input type="number" class="form-control" name="precio" step="0.01" placeholder="0.00">
+                        <input type="number" class="form-control" name="precio" step="0.01" placeholder="0.00" required>
                     </div>
 
                     <!-- unidades -->
                     <div class="mb-3">
                         <label for="unidades" class="form-label">Unidades</label>
-                        <input type="number" class="form-control" name="unidades" placeholder="0" step="1">
+                        <input type="number" class="form-control" name="unidades" placeholder="0" step="1" required>
                     </div>
                     <!-- fecha_edicion -->
                     <div class="mb-3">
                         <label for="fecha_edicion" class="form-label">Fecha Edición</label>
-                        <input type="date" class="form-control" name="fecha_edicion">
+                        <input type="date" class="form-control" name="fecha_edicion" required>
                     </div>
                     <!-- isbn -->
                     <div class="mb-3">
                         <label for="isbn" class="form-label">Isbn</label>
-                        <input type="number" class="form-control" name="isbn">
+                        <input type="number" class="form-control" name="isbn" required>
                     </div>
 
                     <!-- lista checbox dinámica géneros -->

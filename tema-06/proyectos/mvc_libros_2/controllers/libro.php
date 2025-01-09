@@ -22,19 +22,8 @@ class Libro extends Controller
         // Creo la propiedad title de la vista
         $this->view->title = "Gestión de libros";
 
-        // Creo la propiedad libros para usar en la vista
-        $stmt = $this->model->get();
-
-        // Obtenemos un array
-        $array_libros = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-        //Recorremos el array y asignamos el nombre de los generos
-        foreach ($array_libros as $libro) {
-            $libro->nombre_generos = $this->model->get_nombre_generos($libro->generos_id);
-        }
-
         //Asigno el valor a una variable
-        $this->view->libros = $array_libros;
+        $this->view->libros = $this->model->get();
 
         $this->view->render('libro/main/index');
     }
@@ -243,12 +232,7 @@ class Libro extends Controller
         $this->view->title = "Mostrar - Gestión de libros";
 
         # Obtengo los detalles del libro mediante el método read del modelo
-        $libro = $this->model->read($id);
-
-        # obtener los generos
-        $libro->nombre_generos = $this->model->get_nombre_generos($libro->generos_id);
-
-        $this->view->libro = $libro;
+        $this->view->libro = $this->model->read($id);
 
         # Cargo la vista
         $this->view->render('libro/mostrar/index');
@@ -275,20 +259,9 @@ class Libro extends Controller
 
         # Cargo el título
         $this->view->title = "Filtrar por: {$expresion} - Gestión de libros";
-    
-        // Creo la propiedad libros para usar en la vista
-        $stmt = $this->model->filter($expresion);
-
-        // Obtenemos un array
-        $array_libros = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-        //Recorremos el array y asignamos el nombre de los generos
-        foreach ($array_libros as $libro) {
-            $libro->nombre_generos = $this->model->get_nombre_generos($libro->generos_id);
-        }
 
         //Asigno el valor a una variable
-        $this->view->libros = $array_libros;
+        $this->view->libros = $this->model->filter($expresion);
 
         # Cargo la vista
         $this->view->render('libro/main/index');
@@ -313,6 +286,7 @@ class Libro extends Controller
             2 => 'Título',
             3 => 'Autor',
             4 => 'Editorial',
+            5 => 'Generos',
             6 => 'Stock',
             7 => 'Precio'
         ];
@@ -324,19 +298,8 @@ class Libro extends Controller
         # Cargo el título
         $this->view->title = "Ordenar por {$criterios[$id]} - Gestión de libros";
 
-        # Obtengo los libros ordenados por el campo id
-        $stmt = $this->model->order($id);
-
-        // Obtenemos un array
-        $array_libros = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-        //Recorremos el array y asignamos el nombre de los generos
-        foreach ($array_libros as $libro) {
-            $libro->nombre_generos = $this->model->get_nombre_generos($libro->generos_id);
-        }
-
         //Asigno el valor a una variable
-        $this->view->libros = $array_libros;
+        $this->view->libros = $this->model->order($id);
 
         # Cargo la vista
         $this->view->render('libro/main/index');

@@ -47,7 +47,7 @@
                         </thead>
                         <tbody>
                             <!-- Mostramos cuerpo de la tabla -->
-                            <?php foreach ($this->libros as $libro): ?>
+                            <?php while ($libro = $this->libros->fetch()): ?>
                                 <tr class="align-middle">
                                     <!-- Detalles de artículos -->
                                     <td><?= $libro->id ?></td>
@@ -72,7 +72,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php endwhile; ?>
                         </tbody>
                         
                     </table>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="card-footer">
-            Nº libros <?= count($this->libros) ?>
+            Nº libros <?= $this->libros->rowCount() ?>
             </div>
         </div>
         <br><br><br>

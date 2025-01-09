@@ -29,18 +29,27 @@ class libroModel extends Model
                 libros.titulo,
                 autores.nombre as autor,
                 editoriales.nombre as editorial,
-                libros.generos_id,
+                GROUP_CONCAT(generos.tema SEPARATOR ', ') AS generos_nombres, 
                 libros.stock,
                 libros.precio
             FROM 
-                libros 
+                libros
             INNER JOIN
                 autores
-            ON autores.id = libros.autor_id
+            ON 
+                autores.id = libros.autor_id
             INNER JOIN
                 editoriales
-            ON editoriales.id = libros.editorial_id
-            ORDER BY libros.id
+            ON 
+                editoriales.id = libros.editorial_id
+            INNER JOIN
+                generos
+            ON 
+                FIND_IN_SET(generos.id, libros.generos_id) > 0 -- Relación entre libros y géneros
+            GROUP BY 
+                libros.id
+            ORDER BY 
+                libros.id;
             ;";
 
             // conectamos con la base de datos
@@ -67,39 +76,6 @@ class libroModel extends Model
         }
     }
 
-    /*
-       método: get_nombre_generos()
-
-   */
-  public function get_nombre_generos($generos)
-{
-    try {
-        // Convierte la cadena de IDs de géneros separados por comas en un array.
-        $array_id_generos = explode(',', $generos);
-
-        // Obtiene todos los nombres de los géneros disponibles de la base de datos.
-        $array_nombre_generos = $this->get_generos();
-
-        // Crea un array vacío para almacenar los nombres de los géneros.
-        $array_generos = [];
-
-        // Recorre los IDs de géneros y los usa para obtener los nombres de los géneros.
-        foreach ($array_id_generos as $id_genero) {
-            // Agrega el nombre del género al array.
-            $array_generos[] = $array_nombre_generos[$id_genero];
-        }
-
-        // Une los nombres de los géneros con comas y los devuelve.
-        return implode(', ', $array_generos);
-
-    } catch (PDOException $e) {
-        // En caso de un error de base de datos, se carga una vista de error.
-        require 'template/partials/errorDB.partial.php';
-        $stmt = null;
-        $conexion = null;
-        $this->db = null;
-    }
-}
 
 
     /*
@@ -318,21 +294,34 @@ class libroModel extends Model
                         autores.nombre AS autor,
                         editoriales.id AS editorial_id,
                         editoriales.nombre AS editorial,
+                        GROUP_CONCAT(generos.tema SEPARATOR ', ') AS generos_nombres, 
                         libros.generos_id,
                         libros.stock,
                         libros.precio,
                         libros.fecha_edicion,
                         libros.isbn
                     FROM 
-                        libros 
+                        libros
                     INNER JOIN
                         autores
-                    ON autores.id = libros.autor_id
+                    ON 
+                        autores.id = libros.autor_id
                     INNER JOIN
                         editoriales
-                    ON editoriales.id = libros.editorial_id
+                    ON 
+                        editoriales.id = libros.editorial_id
+                    INNER JOIN
+                        generos
+                    ON 
+                        FIND_IN_SET(generos.id, libros.generos_id) > 0 -- Relación entre libros y géneros
+                    
                     WHERE
-                        libros.id = :id
+                                libros.id = :id
+                                GROUP BY 
+                        libros.id
+                    ORDER BY 
+                        libros.id
+                    
                     LIMIT 1";
 
             # Conectar con la base de datos
@@ -554,19 +543,27 @@ public function update(classLibro $libro, $id)
                 libros.titulo,
                 autores.nombre as autor,
                 editoriales.nombre as editorial,                        
-                libros.generos_id,
+                GROUP_CONCAT(generos.tema SEPARATOR ', ') AS generos_nombres, 
                 libros.stock,
                 libros.precio,
                 libros.fecha_edicion,
                 libros.isbn
             FROM 
-                libros 
+                libros
             INNER JOIN
                 autores
-            ON autores.id = libros.autor_id
+            ON 
+                autores.id = libros.autor_id
             INNER JOIN
                 editoriales
-            ON editoriales.id = libros.editorial_id
+            ON 
+                editoriales.id = libros.editorial_id
+            INNER JOIN
+                generos
+            ON 
+                FIND_IN_SET(generos.id, libros.generos_id) > 0 -- Relación entre libros y géneros
+            GROUP BY 
+                libros.id
                         
             ORDER BY 
                 :criterio

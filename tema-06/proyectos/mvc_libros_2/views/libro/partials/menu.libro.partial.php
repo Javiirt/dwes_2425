@@ -21,6 +21,7 @@
                         <li><a class="dropdown-item" href="<?= URL ?>libro/ordenar/2">Título</a></li>
                         <li><a class="dropdown-item" href="<?= URL ?>libro/ordenar/3">Autor</a></li>
                         <li><a class="dropdown-item" href="<?= URL ?>libro/ordenar/4">Editorial</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>libro/ordenar/5">Generos</a></li>
                         <li><a class="dropdown-item" href="<?= URL ?>libro/ordenar/6">Stock</a></li>
                         <li><a class="dropdown-item" href="<?= URL ?>libro/ordenar/7">Precio</a></li>
                         
