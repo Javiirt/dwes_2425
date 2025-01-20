@@ -647,4 +647,144 @@ public function update(classLibro $libro, $id)
             exit();
         }
     }
+
+    /*
+        método: validateForeignKeyEditorial($editorial_id)
+
+        descripción: valida el editorial_id seleccionado. Que exista en la tabla editoriales
+
+        @param: 
+            - $editorial_id
+
+    */
+    public function validateForeignKeyEditorial(int $editorial_id) {
+
+        try {
+
+            $sql = "
+                SELECT 
+                    id
+                FROM 
+                    editoriales
+                WHERE
+                    id = :editorial_id
+            ";
+
+            $conexion = $this->db->connect();
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(':editorial_id', $editorial_id, PDO::PARAM_INT);
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
+            $stmt->execute();
+
+            if ($stmt->rowCount() == 1) {
+                return TRUE;
+            } 
+
+            return FALSE;
+            
+
+        } catch (PDOException $e) {
+
+            // error base de datos
+            require_once 'template/partials/errorDB.partial.php';
+            $stmt = null;
+            $conexion = null;
+            $this->db = null;
+            exit();
+        }
+    }
+
+    /*
+        método: validateUniqueISBN($isbn)
+
+        descripción: valida el isbn de un libro. Que no exista en la base de datos
+
+        @param: 
+            - $isbn
+
+    */
+    public function validateUniqueISBN($isbn) {
+
+        try {
+
+            $sql = "
+                SELECT 
+                    id
+                FROM 
+                    libros
+                WHERE
+                    isbn = :isbn
+            ";
+
+            $conexion = $this->db->connect();
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(':isbn', $isbn, PDO::PARAM_STR, 13);
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
+            $stmt->execute();
+
+            if ($stmt->rowCount() == 0) {
+                return TRUE;
+            } 
+
+            return FALSE;
+            
+
+        } catch (PDOException $e) {
+
+            // error base de datos
+            require_once 'template/partials/errorDB.partial.php';
+            $stmt = null;
+            $conexion = null;
+            $this->db = null;
+            exit();
+        }
+    }
+
+    /*
+        método: validateForeignKeyGenero($genero)
+
+        descripción: valida el genero seleccionado. Que exista en la tabla generos
+
+        @param: 
+            - $genero
+
+    */
+    public function validateForeignKeyGenero(int $genero) {
+
+        try {
+
+            $sql = "
+                SELECT 
+                    id
+                FROM 
+                    generos
+                WHERE
+                    id = :genero
+            ";
+
+            $conexion = $this->db->connect();
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(':genero', $genero, PDO::PARAM_INT);
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
+            $stmt->execute();
+
+            if ($stmt->rowCount() == 1) {
+                return TRUE;
+            } 
+
+            return FALSE;
+            
+
+        } catch (PDOException $e) {
+
+            // error base de datos
+            require_once 'template/partials/errorDB.partial.php';
+            $stmt = null;
+            $conexion = null;
+            $this->db = null;
+            exit();
+        }
+    }
+
+
 }

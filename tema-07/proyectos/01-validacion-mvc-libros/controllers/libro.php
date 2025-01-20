@@ -56,7 +56,7 @@ class Libro extends Controller
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
         // Crear un objeto de la clase libro
-        $this->view->$libro = new classLibro();
+        $this->view->libro = new classLibro();
 
         // Comrpuebo si hay errores en la validación
         if (isset($_SESSION['error'])) {
@@ -119,7 +119,7 @@ class Libro extends Controller
         $unidades = filter_var($_POST['unidades'] ??= '', FILTER_SANITIZE_NUMBER_INT);
         $fecha_edicion = filter_var($_POST['fecha_edicion'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $isbn = filter_var($_POST['isbn'] ??= '', FILTER_SANITIZE_NUMBER_INT);
-        $generos = filter_var($_POST['generos'] ??= '', FILTER_SANITIZE_NUMBER_INT);
+        $generos = $_POST['generos'];
 
         // Creamos un objeto de la clase libro
         $libro = new classLibro(
@@ -144,27 +144,42 @@ class Libro extends Controller
 
         //Validacion del autor
         //Reglas: Validación Clave Ajena: Obligatorio, Numérico, id de autor existe en la tabla autores.
-
+        if (empty($autor)) {
+            $error['autor'] = 'El autor es obligatorio';
+        } elseif (!$this->model->validateForeignKeyAutor($autor)) {
+            $error['autor'] = 'El autor no existe';
+        }
 
         //Validacion del editorial
         //Reglas: Validación Clave Ajena. Idem
+        if (empty($editorial)) {
+            $error['editorial'] = 'La editorial es obligatoria';
+        } elseif (!filter_var($editorial, FILTER_VALIDATE_INT)) {
+            $error['editorial'] = 'El formato de la editorial no es correcto';
+        } elseif (!$this->model->validateForeignKeyEditorial($editorial)) {
+            $error['editorial'] = 'La editorial no existe';
+        }
 
 
         //Validacion del precio
         //Reglas: Valor obligatorio.
         if (empty($precio)) {
             $error['precio'] = 'El precio es obligatorio';
+        }elseif(!is_numeric($precio)) {
+            $error['precio'] = 'El precio debe ser un número';
         }
 
         //Validacion de las unidades
         //Reglas: Opcional
-
+        if (!empty($unidades) && !is_numeric($unidades)) {
+            $error['unidades'] = 'Las unidades deben ser un número';
+        }
 
         //Validacion de la fecha de edición
         //Reglas: Obligatorio, Formato de fecha
         if (empty($fecha_edicion)) {
             $error['fecha_edicion'] = 'La fecha de edición es obligatoria';
-        } else{
+        } else {
             $fecha = DateTime::createFromFormat('Y-m-d', $fecha_edicion);
             if (!$fecha) {
                 $error['fechaNac'] = 'El formato de la fecha de edición no es correcto';
@@ -174,10 +189,41 @@ class Libro extends Controller
         //Validacion del ISBN
         //Reglas: Obligatorio, formato isbn (13 dígitos numéricos), Valor único
 
+        $options = [
+            'options' => [
+                'regexp' => '/^\d{13}$/'
+            ]
+        ];
+
+        if (empty($isbn)) {
+            $error['isbn'] = 'El isbn es obligatorio';
+
+        } elseif (!filter_var($isbn, FILTER_VALIDATE_REGEXP, $options)) {
+            $error['isbn'] = 'El ISBN debe tener exactamente 13 dígitos';
+
+        } elseif (!$this->model->validateUniqueISBN($isbn)) {
+            $error['isbn'] = 'El ISBN ya existe';
+
+        }
+
 
         //Validacion de los géneros
         //Reglas: Obligatorio (tengo que elegir al menos 1), valores numéricos, valores existentes en la tabla géneros.
-
+        if (empty($generos)) {
+            $error['generos'] = 'El género es obligatorio';
+        } else if (!is_array($generos)) {
+            $error['generos'] = 'El género no tiene el formato correcto';
+        } else if (count($generos) < 1) {
+            $error['generos'] = 'Tienes que elegir al menos un género';
+        } else {
+            foreach ($generos as $genero) {
+                if (!filter_var($genero, FILTER_VALIDATE_INT)) {
+                    $error['generos'] = 'El género no tiene el formato correcto';
+                } else if (!$this->model->validateForeignKeyGenero($genero)) {
+                    $error['generos'] = 'El género no existe';
+                }
+            }
+        }
 
         // Si hay errores
         if (!empty($error)) {
@@ -195,6 +241,8 @@ class Libro extends Controller
             header('location:' . URL . 'libro/nuevo');
             exit();
         }
+
+        
 
         // Añadimos libro a la tabla
         $this->model->create($libro);
