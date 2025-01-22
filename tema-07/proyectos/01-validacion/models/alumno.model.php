@@ -316,6 +316,52 @@ class alumnoModel extends Model
     }
 
     /*
+        método: validateIdAlumno
+
+        descripción: valida el id de un alumno. Que exista en la base de datos
+
+        @param: 
+            - id del alumno
+
+    */
+
+    public function validateIdAlumno(int $id) {
+
+        try {
+
+            $sql = "
+                SELECT 
+                    id
+                FROM 
+                    alumnos
+                WHERE
+                    id = :id
+            ";
+
+            $conexion = $this->db->connect();
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            if ($stmt->rowCount() == 1) {
+                return TRUE;
+            } 
+
+            return FALSE;
+            
+
+        } catch (PDOException $e) {
+
+            // error base de datos
+            require_once 'template/partials/errorDB.partial.php';
+            $stmt = null;
+            $conexion = null;
+            $this->db = null;
+            exit();
+        }
+    }
+
+    /*
         método: filter
 
         descripción: filtra los alumnos por una expresión
