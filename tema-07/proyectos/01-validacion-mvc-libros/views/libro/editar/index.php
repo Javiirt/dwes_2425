@@ -28,11 +28,16 @@
             </div>
             <div class="card-body">
                 <!-- Formulario de libros  -->
-                <form action="<?= URL ?>libro/create" method="POST">
+                <form action="<?= URL ?>libro/update/<?= $this->id ?>/<?= $this->csrf_token?>" method="POST">
 
                     <!-- protección CSRF -->
                     <input type="hidden" name="csrf_token"
                         value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
+
+                    <!-- id oculto -->
+                    <!-- Tengo que pasar el id oculto para que el controlador pueda validar doblemente el id -->
+                    <input type="number" class="form-control" name="id" 
+                    value="<?= htmlspecialchars($this->libro->id) ?>" hidden>
 
                     <!-- Titulo -->
                     <div class="mb-3">
@@ -55,7 +60,7 @@
                             <option selected disabled>Seleccione autor</option>
                             <!-- mostrar lista autores -->
                             <?php foreach ($this->autores as $indice => $data): ?>
-                                <option value="<?= $indice ?>" <?= $this->libro->autor == $indice ? 'selected' : '' ?>>
+                                <option value="<?= $indice ?>" <?= $this->libro->autor_id == $indice ? 'selected' : '' ?>>
                                     <?= $data ?>
                                 </option>
                             <?php endforeach; ?>
@@ -74,7 +79,7 @@
                             <option selected disabled>Seleccione Editorial</option>
                             <!-- mostrar lista editoriales -->
                             <?php foreach ($this->editoriales as $indice => $data): ?>
-                                <option value="<?= $indice ?>" <?= $this->libro->editorial == $indice ? 'selected' : '' ?>>
+                                <option value="<?= $indice ?>" <?= $this->libro->editorial_id == $indice ? 'selected' : '' ?>>
                                     <?= $data ?>
                                 </option>
                             <?php endforeach; ?>
@@ -89,7 +94,7 @@
                         <label for="precio" class="form-label">Precio</label>
                         <input type="number" class="form-control
                         <?= (isset($this->error['precio'])) ? 'is-invalid' : null ?>" id="precio" name="precio"
-                            step="0.01" placeholder="0.00" min="0"
+                            placeholder="0.00" step="0.01" min="0"
                             value="<?= htmlspecialchars($this->libro->precio ?? '') ?>" required>
                         <span class="form-text text-danger" role="alert">
                             <?= $this->error['precio'] ?? null ?>
