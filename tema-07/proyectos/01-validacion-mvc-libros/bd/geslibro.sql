@@ -228,4 +228,41 @@ INSERT INTO Libros (id, titulo, precio, stock, fecha_edicion, isbn, autor_id, ed
 (11, 'Confieso que He Vivido', 24.50, 7, '1974-01-01', '9788432239467', 5, 5, '8,9');
 
 
+DROP TABLE IF EXISTS users;
+CREATE TABLE IF NOT EXISTS users(
 
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50),
+    email VARCHAR(50) UNIQUE,
+    password CHAR(255),
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS roles;
+CREATE TABLE IF NOT EXISTS roles(
+
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(20),
+    description VARCHAR(100),
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS roles_users;
+CREATE TABLE IF NOT EXISTS roles_users(
+
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	user_id INT UNSIGNED,
+    role_id INT UNSIGNED,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO roles VALUES
+(1, 'Administrador', 'Todos los privilegios de la aplicación', default, default),
+(2, 'Editor', 'Sólo podrá consultar, modificar y añadir información. No podrá eliminar', default, default),
+(3, 'Registrado', 'Sólo podrá realizar consultas', default, default);
+    

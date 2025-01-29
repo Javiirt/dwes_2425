@@ -3,7 +3,7 @@
 
 <head>
     <?php require_once 'template/layouts/head.layout.php'; ?>
-    <title>Registro Nuevo Usuario - Autenticación  </title>
+    <title>Registro Nuevo Usuario - Autenticación </title>
 </head>
 
 <body>
@@ -12,86 +12,84 @@
 
     <!-- Capa Principal -->
     <div class="container">
-        <br><br><br><br>
-
+        <br><br><br><br><br>
         <div class="row justify-content-center">
-            
             <div class="col-md-8">
-            <?php require_once("template/partials/mensaje.partial.php") ?>
-            <?php require_once("template/partials/error.partial.php") ?>
+                <?php require_once("template/partials/mensaje.partial.php") ?>
+                <?php require_once("template/partials/error.partial.php") ?>
                 <div class="card">
                     <div class="card-header">Registro Nuevo Usuario</div>
                     <div class="card-body">
                         <form method="POST" action="<?= URL ?>auth/validate_register">
-                            <!-- token csrf  -->
+                            <!-- token csrf -->
                             <input type="hidden" name="csrf_token"
-                            value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
-                            
+                                value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
 
-                             <!-- campo name -->
-                             <div class="mb-3 row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
-
+                            <!-- campo name -->
+                            <div class="mb-3 row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" 
-                                    value="<?= htmlspecialchars( $this->name)?>" required autocomplete="name" autofocus>
-
-                                     <!-- control de errores  -->
-                                   <?php if (isset($this->errores['name'])): ?>  
-                                        <span class="form-text text-danger" role="alert">
-                                            <?=  $this->error['name'] ??= null?>
-                                        </span>
-                                    <?php endif; ?>
+                                    <input id="name" type="name"
+                                        class="form-control <?= (isset($this->errores['name'])) ? 'is-invalid' : null ?>"
+                                        name="name" value="<?= htmlspecialchars($this->name); ?>" required
+                                        autocomplete="name" autofocus>
+                                    <!-- control de errores -->
+                                    <span class="form-text text-danger" role="alert">
+                                        <?= $this->error['name']  ??= '' ?>
+                                    </span>
                                 </div>
-                            </div>
+                            </div>    
 
                             <!-- campo email -->
                             <div class="mb-3 row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
-
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control <?= (isset($this->errores['email']))? 'is-invalid': null ?>" 
-                                     name="email" value="<?= htmlspecialchars( $this->email) ?>" required 
-                                    autocomplete="email" autofocus>
-
-                                    <!-- control de errores  -->
-                                   <?php if (isset($this->errores['email'])): ?>  
-                                        <span class="form-text text-danger" role="alert">
-                                            <?=  $this->error['email'] ??= null?>
-                                        </span>
-                                    <?php endif; ?>
+                                    <input id="email" type="email"
+                                        class="form-control <?= (isset($this->errores['email'])) ? 'is-invalid' : null ?>"
+                                        name="email" value="<?= htmlspecialchars($this->email); ?>" required
+                                        autocomplete="email" autofocus>
+                                    <!-- control de errores -->
+                                    <span class="form-text text-danger" role="alert">
+                                        <?= $this->error['email']  ??= '' ?>
+                                    </span>
                                 </div>
                             </div>
 
-                           <!--  password confirmacion -->
-                           <div class="mb-3 row">
-                                <label for="password_confirm" class="col-md-4 col-form-label text-md-right">Confirmar Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password_confirm" type="password" 
-                                    class="form-control" name="password_confirm"  required autocomplete="new-password">
-
-                                    
-                                </div>
-                            </div> 
-
+                            <!-- password -->
                             <div class="mb-3 row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control <?= (isset($this->errores['password']))? 'is-invalid': null ?>" 
-                                    id="password" name="password" value="<?= htmlspecialchars( $this->password) ?>" required 
-                                    autocomplete="current-password">
+                                    <input id="password" type="password"
+                                        class="form-control <?= (isset($this->errores['password'])) ? 'is-invalid' : null ?>"
+                                        name="password" value="<?= htmlspecialchars($this->password)  ?>" required
+                                        autocomplete="current-password">
 
+                                    <!-- control de errores -->
+                                    <span class="form-text text-danger" role="alert">
+                                        <?= $this->error['password']  ??= null ?>
+                                    </span>
                                 </div>
                             </div>
 
-                            <!-- botones de accion  -->
-                            <div class="mb-3 row mb-0">
+                            <!-- password confirmación -->
+                            <div class="mb-3 row">
+                                <label for="password_confirm" class="col-md-4 col-form-label text-md-right">Confirmar Password</label>
+
+                                <div class="col-md-6">
+                                    <input id="password_confirm" type="password"
+                                        class="form-control"
+                                        name="password_confirm" required
+                                        autocomplete="password_confirm">
+                                </div>
+                            </div>
+
+                            <!-- botones de acción -->
+                            <div class="mb-3 row mb-0"> 
                                 <div class="col-md-8 offset-md-4">
-                                    <a class="btn btn-secondary" href="<?=URL?>login" role="button">Cancelar</a>
+                                    <a class="btn btn-secondary" href="<?=URL?>auth/login" role="button">Cancelar</a>
                                     <button type="reset" class="btn btn-secondary" >Reset</button>
-                                    <button type="submit" formaction="<?= URL ?>register/validate" class="btn btn-primary">Registrar</button>
+                                    <button type="submit" class="btn btn-primary">Registrar</button>
                                 </div>
                             </div>
                         </form>
@@ -101,10 +99,7 @@
         </div>
 
 
-
     </div>
-
-    
 
     <!-- /.container -->
 
