@@ -55,6 +55,16 @@ class Libro extends Controller
             unset($_SESSION['mensaje']);
         }
 
+        // Compruebo si hay mensaje_error 
+        if (isset($_SESSION['mensaje_error'])) {
+
+            // Creo la propiedad mensaje_error en la vista
+            $this->view->mensaje_error = $_SESSION['mensaje_error'];
+
+            // Elimino la variable de sesión mensaje_error
+            unset($_SESSION['mensaje_error']);
+        }
+
         // Compruebo mensaje error
         if (isset($_SESSION['error'])) {
 
@@ -90,7 +100,7 @@ class Libro extends Controller
         if (!isset($_SESSION['user_id'])) {
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado';
+            $_SESSION['mensaje_error'] = 'Acceso denegado';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -99,7 +109,7 @@ class Libro extends Controller
         }elseif(!in_array($_SESSION['role_id'], $GLOBALS['libro']['nuevo'])){
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado. No tienes permisos suficientes';
+            $_SESSION['mensaje_error'] = 'Acceso denegado. No tienes permisos suficientes';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -329,7 +339,7 @@ class Libro extends Controller
         if (!isset($_SESSION['user_id'])) {
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado';
+            $_SESSION['mensaje_error'] = 'Acceso denegado';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -338,7 +348,7 @@ class Libro extends Controller
         }elseif(!in_array($_SESSION['role_id'], $GLOBALS['libro']['editar'])){
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado. No tienes permisos suficientes';
+            $_SESSION['mensaje_error'] = 'Acceso denegado. No tienes permisos suficientes';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -634,7 +644,7 @@ class Libro extends Controller
         if (!isset($_SESSION['user_id'])) {
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado';
+            $_SESSION['mensaje_error'] = 'Acceso denegado';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -643,7 +653,7 @@ class Libro extends Controller
         }elseif(!in_array($_SESSION['role_id'], $GLOBALS['libro']['eliminar'])){
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado. No tienes permisos suficientes';
+            $_SESSION['mensaje_error'] = 'Acceso denegado. No tienes permisos suficientes';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -708,7 +718,7 @@ class Libro extends Controller
         if (!isset($_SESSION['user_id'])) {
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado';
+            $_SESSION['mensaje_error'] = 'Acceso denegado';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -717,7 +727,7 @@ class Libro extends Controller
         }elseif(!in_array($_SESSION['role_id'], $GLOBALS['libro']['mostrar'])){
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado. No tienes permisos suficientes';
+            $_SESSION['mensaje_error'] = 'Acceso denegado. No tienes permisos suficientes';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -782,7 +792,7 @@ class Libro extends Controller
         if (!isset($_SESSION['user_id'])) {
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado';
+            $_SESSION['mensaje_error'] = 'Acceso denegado';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -791,7 +801,7 @@ class Libro extends Controller
         }elseif(!in_array($_SESSION['role_id'], $GLOBALS['libro']['filtrar'])){
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado. No tienes permisos suficientes';
+            $_SESSION['mensaje_error'] = 'Acceso denegado. No tienes permisos suficientes';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -841,7 +851,7 @@ class Libro extends Controller
         if (!isset($_SESSION['user_id'])) {
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado';
+            $_SESSION['mensaje_error'] = 'Acceso denegado';
 
             // redireciona al login
             header('location:' . URL . 'libro');
@@ -850,7 +860,7 @@ class Libro extends Controller
         }elseif(!in_array($_SESSION['role_id'], $GLOBALS['libro']['ordenar'])){
 
             // Genero mensaje de error
-            $_SESSION['mensaje'] = 'Acceso denegado. No tienes permisos suficientes';
+            $_SESSION['mensaje_error'] = 'Acceso denegado. No tienes permisos suficientes';
 
             // redireciona al login
             header('location:' . URL . 'libro');

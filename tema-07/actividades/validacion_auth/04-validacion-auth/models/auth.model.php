@@ -148,11 +148,7 @@ class authModel extends Model
             // devuelo el id asignado
             $id = $conexion->lastInsertId();
 
-            // si se ha insertado correctamente devuelvo TRUE
-            if ($stmt->rowCount() > 0) {
-                return TRUE;
-            }
-            return FALSE;
+            return $id;
 
         } catch (PDOException $e) {
 
@@ -301,7 +297,7 @@ class authModel extends Model
             $stmt->execute();
 
             // devuelvo el resultado
-            return $stmt->fetch();
+            return $stmt->fetch()->role_id;
 
         } catch (PDOException $e) {
 

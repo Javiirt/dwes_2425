@@ -262,4 +262,110 @@ class authModel extends Model
         }
     }
 
+    /*
+
+        método: getPerfilRole
+
+        descripción: obtiene el id_rol por su id
+
+        @param:
+            - id del usuario
+    */
+
+    public function getPerfilRole($id)
+    {
+
+        try {
+            $sql = '
+            SELECT 
+                role_id
+            FROM 
+                roles_users            
+            WHERE 
+                user_id = :id';
+
+
+            // conectamos con la base de datos
+            $conexion = $this->db->connect();
+
+            // ejecuto prepare
+            $stmt = $conexion->prepare($sql);
+
+            // Tipo de fetch
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
+
+            // bindeo parámetros
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            // ejecutamos
+            $stmt->execute();
+
+            // devuelvo el resultado
+            return $stmt->fetch();
+
+        } catch (PDOException $e) {
+
+            // error base de datos
+            require 'template/partials/errorDB.partial.php';
+            $stmt = null;
+            $conexion = null;
+            $this->db = null;
+        }
+
+
+    }
+
+    /*
+
+        método: getRoleName
+
+        descripción: obtiene el name por su id
+
+        @param:
+            - id del rol
+    */
+
+    public function getRoleName($id)
+    {
+
+        try {
+            $sql = '
+            SELECT 
+                name
+            FROM 
+                roles            
+            WHERE 
+                id = :id 
+            LIMIT 1';
+
+
+            // conectamos con la base de datos
+            $conexion = $this->db->connect();
+
+            // ejecuto prepare
+            $stmt = $conexion->prepare($sql);
+
+            // Tipo de fetch
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
+
+            // bindeo parámetros
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            // ejecutamos
+            $stmt->execute();
+
+            // devuelvo el resultado
+            return $stmt->fetch()->name;
+
+        } catch (PDOException $e) {
+
+            // error base de datos
+            require 'template/partials/errorDB.partial.php';
+            $stmt = null;
+            $conexion = null;
+            $this->db = null;
+        }
+
+
+    }
 }

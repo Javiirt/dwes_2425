@@ -47,11 +47,23 @@ class Auth extends Controller
         if (isset($_SESSION['error'])) {
 
             // Creo la propiedad mensaje_error en la vista
-            $this->view->mensaje_error = $_SESSION['error'];
+            $this->view->mensaje_error = "Error en la autenticación";
 
-            // Elimino la variable de sesión error
-            unset($_SESSION['error']);
-        }
+            // Creo la propiedad error en la vista
+            $this->view->error = $_SESSION['error'];
+
+
+            // Retroalimento los campos del  formulario
+            $this->view->email = $_SESSION['email'];
+            $this->view->password = $_SESSION['password'];
+
+            // Elimino la variable de sesión 
+            unset($_SESSION['error'],
+                $_SESSION['email'],
+                $_SESSION['password']
+            );
+
+        }        
 
         // Creo la propiedad title de la vista
         $this->view->title = "Autenticación de Usuarios";
@@ -319,19 +331,19 @@ class Auth extends Controller
         // Formulario validado
 
         // Creo la variable de sessión user con los datos del usuario
-        $_SESSION['id'] = $user->id;
-        $_SESSION['name_user'] = $user->name;
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_name'] = $user->name;
 
         // Datos del rol del usuario
-        $_SESSION['rol_id'] = $this->model->getRole($user->id);
-        $_SESSION['rol_name'] = $this->model->getRoleName($_SESSION['rol_id']);
+        $_SESSION['role_id'] = $this->model->getPerfilRole($user->id);
+        $_SESSION['role_name'] = $this->model->getRoleName($_SESSION['role_id']);
 
 
         // Genero mensaje de inicio de sesión
         $_SESSION['mensaje'] = 'Usuario '.$user->name.' ha iniciado sesión';
 
         //Redirreccion al panel de control
-        header('location:' . URL . 'home');
+        header('location:' . URL ."alumno");
         exit();
     }
 
