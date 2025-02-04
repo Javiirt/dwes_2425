@@ -255,7 +255,7 @@ class libroModel extends Model
             $stmt->bindParam(':titulo', $libro->titulo, PDO::PARAM_STR, 80);
             $stmt->bindParam(':precio', $libro->precio, PDO::PARAM_STR);
             $stmt->bindParam(':stock', $libro->unidades, PDO::PARAM_INT);
-            $stmt->bindParam(':fecha_edicion', $libro->fechaEdicion, PDO::PARAM_STR, 10);
+            $stmt->bindParam(':fecha_edicion', $libro->fecha_edicion, PDO::PARAM_STR, 10);
             $stmt->bindParam(':isbn', $libro->isbn, PDO::PARAM_STR, 13);
             $stmt->bindParam(':autor_id', $libro->autor, PDO::PARAM_INT);
             $stmt->bindParam(':editorial_id', $libro->editorial, PDO::PARAM_INT);
@@ -394,7 +394,7 @@ public function update(classLibro $libro, $id)
         $stmt->bindParam(':titulo', $libro->titulo, PDO::PARAM_STR, 80);
         $stmt->bindParam(':precio', $libro->precio, PDO::PARAM_STR);
         $stmt->bindParam(':stock', $libro->unidades, PDO::PARAM_INT);
-        $stmt->bindParam(':fecha_edicion', $libro->fechaEdicion, PDO::PARAM_STR);
+        $stmt->bindParam(':fecha_edicion', $libro->fecha_edicion, PDO::PARAM_STR);
         $stmt->bindParam(':isbn', $libro->isbn, PDO::PARAM_STR, 13);
         $stmt->bindParam(':autor_id', $libro->autor, PDO::PARAM_INT);
         $stmt->bindParam(':editorial_id', $libro->editorial, PDO::PARAM_INT);

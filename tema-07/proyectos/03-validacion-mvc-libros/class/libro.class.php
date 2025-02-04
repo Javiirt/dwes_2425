@@ -15,7 +15,7 @@
         public $editorial;
         public $precio;
         public $unidades;
-        public $fechaEdicion;
+        public $fecha_edicion;
         public $isbn;
         public $generos;
         
@@ -27,7 +27,7 @@
             $editorial = null,
             $precio = null,
             $unidades = null,
-            $fechaEdicion = null,
+            $fecha_edicion = null,
             $isbn = null,
             $generos = []
             ) {
@@ -37,7 +37,7 @@
                 $this->editorial = $editorial;
                 $this->precio = $precio;
                 $this->unidades = $unidades;
-                $this->fechaEdicion = $fechaEdicion;
+                $this->fecha_edicion = $fecha_edicion;
                 $this->isbn = $isbn;
                 $this->generos = $generos;
             } 

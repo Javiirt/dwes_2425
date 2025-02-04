@@ -533,7 +533,7 @@ class Libro extends Controller
             } else {
                 $fecha = DateTime::createFromFormat('Y-m-d', $fecha_edicion);
                 if (!$fecha) {
-                    $error['fechaNac'] = 'El formato de la fecha de edición no es correcto';
+                    $error['fecha_edicion'] = 'El formato de la fecha de edición no es correcto';
                 }
             }
         }

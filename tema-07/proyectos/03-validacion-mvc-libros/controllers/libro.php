@@ -170,6 +170,26 @@ class Libro extends Controller
         // inicio o continuo la sesión
         session_start();
 
+        //Compruebo si hay un usuario logueado
+        if (!isset($_SESSION['user_id'])) {
+
+            // Genero mensaje de error
+            $_SESSION['mensaje_error'] = 'Acceso denegado';
+
+            // redireciona al login
+            header('location:' . URL . 'libro');
+            exit();
+
+        }elseif(!in_array($_SESSION['role_id'], $GLOBALS['libro']['nuevo'])){
+
+            // Genero mensaje de error
+            $_SESSION['mensaje_error'] = 'Acceso denegado. No tienes permisos suficientes';
+
+            // redireciona al login
+            header('location:' . URL . 'libro');
+            exit();
+        }
+
         // Validación CSRF
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
             die('Petición no válida');
@@ -246,7 +266,7 @@ class Libro extends Controller
         } else {
             $fecha = DateTime::createFromFormat('Y-m-d', $fecha_edicion);
             if (!$fecha) {
-                $error['fechaNac'] = 'El formato de la fecha de edición no es correcto';
+                $error['fecha_edicion'] = 'El formato de la fecha de edición no es correcto';
             }
         }
 

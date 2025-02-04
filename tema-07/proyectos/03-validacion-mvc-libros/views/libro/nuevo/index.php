@@ -101,7 +101,7 @@
                         <label for="unidades" class="form-label">Unidades</label>
                         <input type="number" class="form-control
                         <?= (isset($this->error['unidades'])) ? 'is-invalid' : null ?>" id="unidades" name="unidades"
-                            placeholder="0" step="1" min="0" value="<?= htmlspecialchars($this->libro->stock ?? '') ?>"
+                            placeholder="0" step="1" min="0" value="<?= htmlspecialchars($this->libro->unidades ?? '') ?>"
                             >
                         <span class="form-text text-danger" role="alert">
                             <?= $this->error['unidades'] ?? null ?>
