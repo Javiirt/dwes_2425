@@ -3,7 +3,7 @@
 
 # Ruta absoluta
 
-define('URL', 'http://localhost/dwes_2425/tema-07/proyectos/04-validacion-auth-perfiles-menu/');
+define('URL', 'http://localhost/dwes/tema-07/actividades/validacion_auth/07-validacion-auth/');
 
 # Constante de la Base de Datos
 define('HOST', 'localhost');
