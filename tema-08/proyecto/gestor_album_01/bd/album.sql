@@ -15,11 +15,21 @@ CREATE TABLE IF NOT EXISTS albumes(
     autor varchar(50),
     fecha DATE,
     lugar varchar(50),
-    categoria varchar(50),
+    categoria_id int,
     etiquetas varchar(250),
     num_fotos smallint unsigned,
     num_visitas smallint unsigned,
     carpeta varchar(50),
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS categorias;
+CREATE TABLE IF NOT EXISTS categorias(
+
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) UNIQUE
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -13,7 +13,7 @@ class Perfil extends Controller
 
         Se  carga siempre que la url contenga sólo el primer parámetro
 
-        url: /alumno
+        url: /album
     */
     public function render()
     {
