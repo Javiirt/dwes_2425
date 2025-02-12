@@ -99,6 +99,7 @@ class albumModel extends Model
 
             // devuelvo objeto stmtatement
             return $stmt->fetchAll();
+            
         } catch (PDOException $e) {
 
             // error base de datos
@@ -271,10 +272,7 @@ class albumModel extends Model
                     fecha = :fecha,
                     lugar = :lugar,
                     id_categoria = :id_categoria,
-                    etiquetas = :etiquetas,
-                    num_fotos = :num_fotos,
-                    num_visitas = :num_visitas,
-                    carpeta  = :carpeta
+                    etiquetas = :etiquetas
             WHERE
                     id = :id
             LIMIT 1
@@ -291,9 +289,6 @@ class albumModel extends Model
             $stmt->bindParam(':lugar', $album->lugar, PDO::PARAM_STR, 50);
             $stmt->bindParam(':id_categoria', $album->id_categoria, PDO::PARAM_INT);
             $stmt->bindParam(':etiquetas', $album->etiquetas, PDO::PARAM_STR, 250);
-            $stmt->bindParam(':num_fotos', $album->num_fotos, PDO::PARAM_INT);
-            $stmt->bindParam(':num_visitas', $album->num_visitas, PDO::PARAM_INT);
-            $stmt->bindParam(':carpeta', $album->carpeta, PDO::PARAM_STR, 50);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
             $stmt->execute();
