@@ -51,6 +51,7 @@
                         <tbody>
                             <!-- Mostramos cuerpo de la tabla -->
                             <?php while ($album = $this->albumes->fetch()): ?>
+
                                 <tr class="align-middle">
                                     <!-- Detalles de artículos -->
                                     <td><?= $album->id ?></td>
@@ -64,27 +65,39 @@
                                     <!-- Columna de acciones -->
                                     <td>
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <a href="<?= URL ?>album/eliminar/<?= $album->id ?>/<?= $_SESSION['csrf_token'] ?>"
+
+                                            <!-- botón eliminar -->
+                                            <a href="<?= URL ?>album/eliminar/<?= $album->id ?>/<?= $_SESSION['csrf_token'] ?>/<?= $album->carpeta ?>"
                                                 title="Eliminar"
                                                 class="btn btn-danger
                                                 <?= !in_array($_SESSION['role_id'], $GLOBALS['album']['eliminar']) ? 'disabled' : null ?>"
                                                 onclick="return confirm('Confimar elimación del album')"
                                                 aria-label="Eliminar album"><i class="bi bi-trash-fill"></i></a>
+
+                                            <!-- botón editar -->
                                             <a href="<?= URL ?>album/editar/<?= $album->id ?>/<?= $_SESSION['csrf_token'] ?>"
                                                 title="Editar"
                                                 class="btn btn-primary
                                                 <?= !in_array($_SESSION['role_id'], $GLOBALS['album']['editar']) ? 'disabled' : null ?>">
                                                 <i class="bi bi-pencil-square"></i></a>
+
+                                            <!-- botón mostrar -->
                                             <a href="<?= URL ?>album/mostrar/<?= $album->id ?>/<?= $_SESSION['csrf_token'] ?>"
                                                 title="Mostrar"
                                                 class="btn btn-warning 
                                                 <?= !in_array($_SESSION['role_id'], $GLOBALS['album']['mostrar']) ? 'disabled' : null ?>">
                                                 <i class="bi bi-eye-fill"></i></a>
-                                            <a href="<?= URL ?>album/agregar/<?= $album->id ?>/<?= $_SESSION['csrf_token'] ?>"
-                                                title="Agregar"
-                                                class="btn btn-secondary 
-                                                <?= !in_array($_SESSION['role_id'], $GLOBALS['album']['agregar']) ? 'disabled' : null ?>">
-                                                <i class="bi bi-plus"></i></a>
+
+                                            
+                                            <!-- botón modal -->
+                                            <?php require('views/album/partials/modal.php'); ?>
+                                            
+                                            <a href="#" title="Subir" data-bs-toggle="modal"
+                                                data-bs-target="#subir<?= $album->id ?>"
+                                                class="btn btn-success <?= (!in_array($_SESSION['role_id'], $GLOBALS['album']['agregar'])) ? 'disabled' : null ?> ">
+                                                <i class="bi bi-cloud-upload-fill"></i>
+                                            </a>
+
                                         </div>
                                     </td>
                                 </tr>

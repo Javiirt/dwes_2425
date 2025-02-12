@@ -6,6 +6,15 @@ CREATE DATABASE IF NOT EXISTS album;
 
 USE album;
 
+DROP TABLE IF EXISTS categorias;
+CREATE TABLE IF NOT EXISTS categorias(
+
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) UNIQUE,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 DROP TABLE IF EXISTS albumes;
 CREATE TABLE IF NOT EXISTS albumes(
 
@@ -15,24 +24,16 @@ CREATE TABLE IF NOT EXISTS albumes(
     autor varchar(50),
     fecha DATE,
     lugar varchar(50),
-    categoria_id int,
+    id_categoria int UNSIGNED,
     etiquetas varchar(250),
     num_fotos smallint unsigned,
     num_visitas smallint unsigned,
     carpeta varchar(50),
-    FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id) ON DELETE CASCADE ON UPDATE CASCADE,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS categorias;
-CREATE TABLE IF NOT EXISTS categorias(
-
-	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) UNIQUE
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users(
@@ -71,3 +72,16 @@ INSERT INTO roles VALUES
 (1, 'Administrador', 'Todos los privilegios de la aplicación', default, default),
 (2, 'Editor', 'Sólo podrá consultar, modificar y añadir información. No podrá eliminar', default, default),
 (3, 'Registrado', 'Sólo podrá realizar consultas', default, default);
+
+
+INSERT INTO categorias (nombre) VALUES
+('Viajes'),
+('Familia'),
+('Naturaleza'),
+('Eventos'),
+('Bodas'),
+('Cumpleaños'),
+('Mascotas'),
+('Retratos'),
+('Paisajes'),
+('Arte');

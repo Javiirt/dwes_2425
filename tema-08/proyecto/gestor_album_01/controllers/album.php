@@ -109,7 +109,7 @@ class album extends Controller
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
         // Crear un objeto vacío de la clase album
-        $this->view->album = new classalbum();
+        $this->view->album = new classAlbum();
 
         // Comrpuebo si hay errores en la validación
         if (isset($_SESSION['error'])) {
@@ -132,6 +132,11 @@ class album extends Controller
 
         // Creo la propiead título
         $this->view->title = "Añadir - Gestión de albumes";
+
+
+        // Cargo la lista de categorias
+        $this->view->categorias = $this->model->get_categorias();
+
 
         // Cargo la vista asociada a este método
         $this->view->render('album/nuevo/index');
@@ -182,19 +187,19 @@ class album extends Controller
         $autor = filter_var($_POST['autor'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $fecha = filter_var($_POST['fecha'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $lugar = filter_var($_POST['lugar'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $categoria = filter_var($_POST['categoria'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $id_categoria = filter_var($_POST['id_categoria'] ??= '', FILTER_SANITIZE_NUMBER_INT);
         $etiquetas = filter_var($_POST['etiquetas'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $carpeta = filter_var($_POST['carpeta'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
 
         // Creamos un objeto de la clase album con los detalles del formulario
-        $album = new classalbum(
+        $album_form = new classAlbum(
             null,
             $titulo,
             $descripcion,
             $autor,
             $fecha,
             $lugar,
-            $categoria,
+            $id_categoria,
             $etiquetas,
             $carpeta
         );
@@ -244,8 +249,10 @@ class album extends Controller
 
         // Validacion de categoría 
         // Reglas: obligatorio         
-        if (empty($categoria)) {
-            $error['categoria'] = 'La categoria es obligatoria';
+        if (empty($id_categoria)) {
+            $error['id_categoria'] = 'La categoria es obligatoria';
+        } else if (!$this->model->validateForeignKeyCategoria($id_categoria)) {
+            $error['id_categoria'] = 'La categoria no existe';
         }
 
 
@@ -271,7 +278,7 @@ class album extends Controller
             // Tengo que redireccionar al formulario de nuevo
 
             // Creo la variable de sessión album con los datos del formulario
-            $_SESSION['album'] = $album;
+            $_SESSION['album'] = $album_form;
 
             // Creo la variable de sessión error con los errores
             $_SESSION['error'] = $error;
@@ -282,10 +289,10 @@ class album extends Controller
         }
 
         // Añadimos album a la tabla
-        $this->model->create($album);
+        $this->model->create($album_form);
 
         // Genero mensaje de éxito
-        $_SESSION['mensaje'] = 'album añadido con éxito';
+        $_SESSION['mensaje'] = 'Album añadido con éxito';
 
         // redireciona al main de album
         header('location:' . URL . 'album');
@@ -324,11 +331,11 @@ class album extends Controller
             exit();
         }
 
-        # obtengo el id del album que voy a editar
+        // obtengo el id del album que voy a editar
         // album/edit/4
         $this->view->id = htmlspecialchars($param[0]);
 
-        # obtengo el token CSRF
+        // obtengo el token CSRF
         $this->view->csrf_token = $param[1];
 
         // Validación CSRF
@@ -338,7 +345,7 @@ class album extends Controller
             exit();
         }
 
-        # obtener objeto de la clase album con el id asociado
+        // obtener objeto de la clase album con el id asociado
         $this->view->album = $this->model->read($this->view->id);
 
         // Comrpuebo si hay errores en la validación
@@ -360,10 +367,13 @@ class album extends Controller
             unset($_SESSION['album']);
         }
 
-        # title
-        $this->view->title = "Formulario Editar album";
+        // title
+        $this->view->title = "Formulario Editar Album";
 
-        # cargo la vista
+        // Cargo la lista de categorias
+        $this->view->categorias = $this->model->get_categorias();
+
+        // cargo la vista
         $this->view->render('album/editar/index');
     }
 
@@ -411,28 +421,27 @@ class album extends Controller
             exit();
         }
 
-        // Recogemos los detalles del formulario saneados
+         // Recogemos los detalles del formulario saneados
         // Prevenir ataques XSS
         $titulo = filter_var($_POST['titulo'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $descripcion = filter_var($_POST['descripcion'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $autor = filter_var($_POST['autor'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $fecha = filter_var($_POST['fecha'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $lugar = filter_var($_POST['lugar'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $categoria = filter_var($_POST['categoria'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $id_categoria = filter_var($_POST['id_categoria'] ??= '', FILTER_SANITIZE_NUMBER_INT);
         $etiquetas = filter_var($_POST['etiquetas'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $carpeta = filter_var($_POST['carpeta'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
 
         // Creamos un objeto de la clase album con los detalles del formulario
-        $album_form = new classalbum(
+        $album_form = new classAlbum(
             null,
             $titulo,
             $descripcion,
             $autor,
             $fecha,
             $lugar,
-            $categoria,
+            $id_categoria,
             $etiquetas,
-            $carpeta
+            null
         );
 
         // Obtengo los detalles del album de la base de datos
@@ -501,10 +510,12 @@ class album extends Controller
 
         // Validacion de categoría 
         // Reglas: obligatorio     
-        if (strcmp($categoria, $album->categoria) != 0) {
+        if (strcmp($id_categoria, $album->id_categoria) != 0) {
             $cambios = true;
             if (empty($categoria)) {
-                $error['categoria'] = 'La categoria es obligatoria';
+                $error['id_categoria'] = 'La categoria es obligatoria';
+            } else if (!$this->model->validateForeignKeyCategoria($id_categoria)) {
+                $error['id_categoria'] = 'La categoria no existe';
             }
         }
 
@@ -513,19 +524,6 @@ class album extends Controller
         // Reglas: 
         if (strcmp($etiquetas, $album->etiquetas) != 0) {
             $cambios = true;
-        }
-
-        // Validacion de carpeta 
-        // Reglas: obligatorio, sin espacios, unica
-        if (strcmp($carpeta, $album->carpeta) != 0) {
-            $cambios = true;
-            if (empty($carpeta)) {
-                $error['carpeta'] = 'La carpeta es obligatoria';
-            } else if (strpos($carpeta, ' ') !== false) {
-                $error['carpeta'] = 'La carpeta no puede contener espacios';
-            } else if (!$this->model->validateUniqueCarpeta($carpeta)) {
-                $error['carpeta'] = 'La carpeta ya existe';
-            }
         }
 
 
@@ -561,7 +559,7 @@ class album extends Controller
         // Genero mensaje de éxito
         $_SESSION['mensaje'] = 'Album actualizado con éxito';
 
-        # Cargo el controlador principal de album
+        // Cargo el controlador principal de album
         header('location:' . URL . 'album');
         exit();
     }
@@ -603,6 +601,9 @@ class album extends Controller
         // obtengo el token CSRF
         $csrf_token = $param[1];
 
+        // obtengo la carpeta
+        $carpeta = $param[2];
+
         // Validación CSRF
         if (!hash_equals($_SESSION['csrf_token'], $csrf_token)) {
             require_once 'controllers/error.php';
@@ -623,12 +624,12 @@ class album extends Controller
 
         // Id ha sido validado
         // Elimino al album de la base de datos
-        $this->model->delete($id);
+        $this->model->delete($id, $carpeta);
 
         // Genero mensaje de éxito
         $_SESSION['mensaje'] = 'Album eliminado con éxito';
 
-        # Cargo el controlador principal de album
+        // Cargo el controlador principal de album
         header('location:' . URL . 'album');
     }
 
@@ -686,13 +687,21 @@ class album extends Controller
             exit();
         }
 
-        # Cargo el título
+        // Cargo el título
         $this->view->title = "Mostrar - Gestión de álbumes";
 
-        # Obtengo los detalles del album mediante el método read del modelo
+        // Obtengo los detalles del album mediante el método read del modelo
         $this->view->album = $this->model->read($id);
 
-        # Cargo la vista
+        // Cargo la lista de categorias
+        $this->view->categorias = $this->model->get_categorias();
+
+        $this->view->album->num_visitas++;
+
+        //Actualizo el numero de visitas
+        $this->model->update_visitas($id, $this->view->album->num_visitas);
+
+        // Cargo la vista
         $this->view->render('album/mostrar/index');
     }
 
@@ -729,7 +738,7 @@ class album extends Controller
             exit();
         }
 
-        # Obtengo la expresión de búsqueda
+        // Obtengo la expresión de búsqueda
         $expresion = htmlspecialchars($_GET['expresion']);
 
         // obtengo el token CSRF
@@ -742,13 +751,16 @@ class album extends Controller
             exit();
         }
 
-        # Cargo el título
+        // Cargo el título
         $this->view->title = "Filtrar por: {$expresion} - Gestión de álbumes";
 
-        # Obtengo los albumes que coinciden con la expresión de búsqueda
+        // Obtengo los albumes que coinciden con la expresión de búsqueda
         $this->view->albumes = $this->model->filter($expresion);
 
-        # Cargo la vista
+        // Cargo la lista de categorias
+        $this->view->categorias = $this->model->get_categorias();
+
+        // Cargo la vista
         $this->view->render('album/main/index');
     }
 
@@ -795,7 +807,7 @@ class album extends Controller
             exit();
         }
 
-        # Criterios de ordenación
+        // Criterios de ordenación
         $criterios = [
             1 => 'ID',
             2 => 'Título',
@@ -806,13 +818,69 @@ class album extends Controller
             7 => 'Nº visitas'
         ];
 
-        # Cargo el título
+        // Cargo el título
         $this->view->title = "Ordenar por {$criterios[$id]} - Gestión de albumes";
 
-        # Obtengo los albumes ordenados por el campo id
+        // Obtengo los albumes ordenados por el campo id
         $this->view->albumes = $this->model->order($id);
 
-        # Cargo la vista
+        // Cargo la lista de categorias
+        $this->view->categorias = $this->model->get_categorias();
+
+        // Cargo la vista
         $this->view->render('album/main/index');
+    }
+
+
+    /*
+        Método agregar()
+
+        Descripcion: Agrega una imagen al album
+
+    */
+    function agregar($param = [])
+    {
+
+        // inicio o continuo la sesión
+        session_start();
+
+        // Comprobar si hay un usuario logueado
+        if (!isset($_SESSION['user_id'])) {
+            // Genero mensaje error
+            $_SESSION['mensaje_error'] = 'Acceso denegado';
+            header('location:' . URL . 'auth/login');
+            exit();
+        }
+        // Comprobar si el usuario tiene permisos
+        else if (!in_array($_SESSION['role_id'], $GLOBALS['album']['ordenar'])) {
+            // Genero mensaje error
+            $_SESSION['mensaje_error'] = 'Acceso denegado. No tiene permisos suficientes';
+            header('location:' . URL . 'album');
+            exit();
+        
+        
+        } else {
+
+            # mensaje de error
+            if (isset($_SESSION['error'])) {
+
+                $this->view->error = $_SESSION['error'];
+                $this->view->errores = $_SESSION['errores'];
+
+                unset($_SESSION['error']);
+                unset($_SESSION['errores']);
+            }
+
+            //Obtnego objeto de la clase album
+            $album = $this->model->read($param[0]);
+
+            $this->model->subirArchivo($_FILES['archivos'], $album->carpeta);
+
+            $numFotos = count(glob("images/" . $album->carpeta . "/*"));
+
+            $this->model->numeroFotos($album->id, $numFotos);
+
+            header("location:" . URL . "album");
+        }
     }
 }

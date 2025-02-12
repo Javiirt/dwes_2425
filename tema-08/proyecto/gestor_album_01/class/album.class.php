@@ -15,7 +15,7 @@ class classAlbum
     public $autor;
     public $fecha;
     public $lugar;
-    public $categoria;
+    public $id_categoria;
     public $etiquetas;
     public $carpeta;
     public $num_fotos;
@@ -29,7 +29,7 @@ class classAlbum
         $autor = null,
         $fecha = null,
         $lugar = null,
-        $categoria = null,
+        $id_categoria = null,
         $etiquetas = null,
         $carpeta = null
     ) {
@@ -39,7 +39,7 @@ class classAlbum
         $this->autor = $autor;
         $this->fecha = $fecha;
         $this->lugar = $lugar;
-        $this->categoria = $categoria;
+        $this->id_categoria = $id_categoria;
         $this->etiquetas = $etiquetas;
         $this->carpeta = $carpeta;
         $this->num_fotos = 0;
