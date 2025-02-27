@@ -221,8 +221,14 @@ class Perfil extends Controller
             exit();
         }
 
+        // Obtengo los detalles del usuario
+        $user = $this->model->getUserId($_SESSION['user_id']);
+
         // Actualizo los datos del usuario
         $this->model->update($name, $email, $_SESSION['user_id']);
+
+        // Envío email
+        $this->enviarEmail($user->name, $user->email, 'editar');
 
         // Actualizo el posible nuevo nombre del usuario
         $_SESSION['user_name'] = $name;
@@ -367,8 +373,14 @@ class Perfil extends Controller
             exit();
         }
 
+        // Obtengo los detalles del usuario
+        $user = $this->model->getUserId($_SESSION['user_id']);
+
         // Actualizo password del usuario
         $this->model->updatePass($new_password, $_SESSION['user_id']);
+
+        // Envío email
+        $this->enviarEmail($user->name, $user->email, 'contrasena');
 
         // Genero mensaje de éxito
         $_SESSION['mensaje'] = 'Contraseña actualizada correctamente';
@@ -413,8 +425,14 @@ class Perfil extends Controller
             exit();
         }
 
+        // Obtengo los detalles del usuario
+        $user = $this->model->getUserId($_SESSION['user_id']);
+
         // Elimino el usuario
         $this->model->delete($_SESSION['user_id']);
+
+        // Envío email
+        $this->enviarEmail($user->name, $user->email, 'eliminar');
 
         // Cierro la sesión
         session_destroy();
@@ -433,71 +451,72 @@ class Perfil extends Controller
     }
 
 
-    // /*
-    //     Envía un email
-    // */
-    // function enviarEmail($name, $email, $tipo)
-    // {
-    //     // Configuración de la cuenta de correo
-    //     require_once 'config/smtp_brevo.php';
+    /*
+        Envía un email
+    */
+    function enviarEmail($name, $email, $tipo)
+    {
+        // Configuración de la cuenta de correo
+        require_once 'config/smtp_brevo.php';
 
-    //     // Cargar la librería PHPMailer
-    //     require_once 'extensions/PHPMailer/src/PHPMailer.php';
-    //     require_once 'extensions/PHPMailer/src/SMTP.php';
-    //     require_once 'extensions/PHPMailer/src/Exception.php';
+        // Cargar la librería PHPMailer
+        require_once 'extensions/PHPMailer/src/PHPMailer.php';
+        require_once 'extensions/PHPMailer/src/SMTP.php';
+        require_once 'extensions/PHPMailer/src/Exception.php';
 
-    //     // Crear una nueva instancia de PHPMailer
-    //     $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-
-
-    //     switch ($tipo) {
-    //         case 'contrasena':
-    //             $subject = 'Contraseña actualizada';
-    //             $message = "Hola $name, su contraseña ha sido actualizada con éxito";
-    //             break;
-    //         case 'editar':
-    //             $subject = 'Datos actualizados';
-    //             $message = "Hola $name, sus datos han sido actualizados con éxito";
-    //             break;
-    //         case 'eliminar':
-    //             $subject = 'Cuenta eliminada';
-    //             $message = "Hola $name, su cuenta ha sido eliminada con éxito";
-    //             break;
-    //         default:
-    //             break;
-    //     }
+        // Crear una nueva instancia de PHPMailer
+        $mail = new PHPMailer\PHPMailer\PHPMailer(true);
 
 
+        switch ($tipo) {
+            case 'contrasena':
+                $subject = 'Contraseña actualizada';
+                $message = "Hola $name, su contraseña ha sido actualizada con éxito";
+                break;
+            case 'editar':
+                $subject = 'Datos actualizados';
+                $message = "Hola $name, sus datos han sido actualizados con éxito";
+                break;
+            case 'eliminar':
+                $subject = 'Cuenta eliminada';
+                $message = "Hola $name, su cuenta ha sido eliminada con éxito";
+                break;
+            default:
+                break;
+        }
 
-    //     try {
 
-    //         // Configuración juego caracteres
-    //         $mail->CharSet = "UTF-8";
-    //         $mail->Encoding = "quoted-printable";
 
-    //         // Servidor SMTP
-    //         $mail->isSMTP();
-    //         $mail->Host = SMTP_HOST;
-    //         $mail->SMTPAuth = true;
-    //         $mail->Username = SMTP_USER;
-    //         $mail->Password = SMTP_PASS;
-    //         $mail->Port = SMTP_PORT;
-    //         $mail->SMTPSecure = 'tls';
+        try {
+            
 
-    //         // Configurar el email
-    //         $mail->setFrom($email, $name);
-    //         $mail->addAddress($email);
-    //         $mail->Subject = $subject;
-    //         $mail->Body = $message;
+            // Configuración juego caracteres
+            $mail->CharSet = "UTF-8";
+            $mail->Encoding = "quoted-printable";
 
-    //         // Configurar el email
-    //         $mail->send();
+            // Servidor SMTP
+            $mail->isSMTP();
+            $mail->Host = SMTP_HOST;
+            $mail->SMTPAuth = true;
+            $mail->Username = SMTP_USER;
+            $mail->Password = SMTP_PASS;
+            $mail->Port = SMTP_PORT;
+            $mail->SMTPSecure = 'tls';
 
-    //     } catch (Exception $e) {
-    //         $this->view->mensaje_error = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    //         $this->view->render('contactar/confirm/index');
-    //         exit();
-    //     }
+            // Configurar el email
+            $mail->setFrom($email, $name);
+            $mail->addAddress($email);
+            $mail->Subject = $subject;
+            $mail->Body = $message;
 
-    // }
+            // Configurar el email
+            $mail->send();
+
+        } catch (Exception $e) {
+            $this->view->mensaje_error = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $this->view->render('contactar/confirm/index');
+            exit();
+        }
+
+    }
 }

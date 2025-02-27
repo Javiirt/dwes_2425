@@ -286,8 +286,6 @@ class perfilModel extends Model
         }
     }
 
-    
-
 
 
 }
