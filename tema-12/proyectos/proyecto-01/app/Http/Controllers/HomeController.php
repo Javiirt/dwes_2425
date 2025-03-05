@@ -32,16 +32,18 @@ class HomeController extends Controller
         $regiones = [
         ];
         //cargo la vista principal
-        return view(
-            'home',
-            compact(
-                'title',
-                'curso',
-                'nombre',
-                'perfil',
-                'ciudades',
-                'regiones'
-            )
-        );
+        // return view(
+        //     'home',
+        //     compact(
+        //         'title',
+        //         'curso',
+        //         'nombre',
+        //         'perfil',
+        //         'ciudades',
+        //         'regiones'
+        //     )
+        // );
+
+        return view('home');
     }
 }

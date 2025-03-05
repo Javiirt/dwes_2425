@@ -35,7 +35,7 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 Route::resource('clients', UserController::class);
 
 // Ruta para el controlador HomeController
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('index');
 
 // Ruta para el controlador ProductController
 Route::resource('products', ProductController::class);
